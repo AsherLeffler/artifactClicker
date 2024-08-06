@@ -1,0 +1,76 @@
+body{
+  margin: 0;
+}
+.rightPage{
+  flex: 0.8;
+  background: radial-gradient(#1c1c1c, #2a2a2a, #393939);
+  overflow-x: hidden;
+}
+.extractPage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(118, 118, 118);
+  position: relative;
+  height: 100vh;
+}
+.extractPage i{
+  font-size: 8rem;
+  transition: 0.05s;
+}
+.extractPage i:active{
+  font-size: 8.5rem;
+}
+.artifact{
+  width: calc(25% - 15px);
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(90deg, rgb(40, 40, 40), rgb(53, 53, 53), rgb(40, 40, 40));
+  margin: 7.5px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+  color: rgb(108, 108, 108);
+  font-family: 'Antic', sans-serif;
+  align-items: center;
+}
+.artifact img{
+  width: 60%;
+  aspect-ratio: 1 / 1;
+}
+.artifact h2{
+  font-size: 1.3rem;
+  margin: 0;
+}
+.artifact h3{
+  margin: 0;
+}
+.canBuy{
+  width: 90%;
+  height: 40px;
+  background-color: rgb(0, 115, 255);
+  font-family: "Antic", sans-serif;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.cannotBuy{
+  width: 90%;
+  height: 40px;
+  background-color: rgb(108, 108, 108);
+  font-family: "Antic", sans-serif;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.canBuy:hover{
+  background-color: rgb(0, 99, 221);
+}
+.cannotBuy:hover{
+  background-color: rgb(86, 86, 86);
+}
