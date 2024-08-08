@@ -8,6 +8,8 @@ const ArtifactComponent = ({
   setTotalValue,
   setValueProgress,
   valueProgress,
+  ownedArtifacts,
+  setOwnedArtifacts
 }) => {
   function handleValueChange(sampleValue) {
     const newTotalValue = totalValue + sampleValue;
@@ -16,16 +18,21 @@ const ArtifactComponent = ({
     setTotalValue(newTotalValue);
     setValueProgress(newValueProgress);
     document.getElementById("progressBar").style.width = `${newValueProgress}%`;
-    console.log(newTotalValue);
   }
-
+  const addOwnedArtifact = () => {
+    setOwnedArtifacts((prevOwnedArtifacts) => [
+      ...prevOwnedArtifacts,
+      { itemID },
+    ]);
+  };
   function handleBuy() {
     if (balance >= itemID.price) {
       setBalance((prevBalance) => prevBalance - itemID.price);
       document.getElementById(itemID.name).setAttribute("src", check);
+      addOwnedArtifact();
       setTimeout(() => {
         document.getElementById(itemID.name).setAttribute("src", itemID.image);
-      }, 1000);
+      }, 100);
       handleValueChange(itemID.price);
     }
   }

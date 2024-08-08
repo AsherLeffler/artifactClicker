@@ -12,9 +12,10 @@ function App() {
   const [totalValue, setTotalValue] = useState(0);
   const [valueProgress, setValueProgress] = useState(100);
   const [levelValue, setLevelValue] = useState(100);
-  const [balance, setBalance] = useState(0);
+  const [balance, setBalance] = useState(1000000000);
   const [levelID, setLevelID] = useState(2);
   const [moreValueNeeded, setMoreValueNeeded] = useState(100);
+  const [ownedArtifacts, setOwnedArtifacts] = useState([]);
 
   useEffect(() => {
     if (totalValue >= levelValue) {
@@ -64,7 +65,19 @@ function App() {
       case "extractBtn":
         return <ExtractPage balance={balance} setBalance={setBalance} />;
       case "inventoryBtn":
-        return <InventoryPage />;
+        return (
+          <InventoryPage
+            ownedArtifacts={ownedArtifacts}
+            setOwnedArtifacts={setOwnedArtifacts}
+            balance={balance}
+            setBalance={setBalance}
+            levelValue={levelValue}
+            totalValue={totalValue}
+            setTotalValue={setTotalValue}
+            setValueProgress={setValueProgress}
+            valueProgress={valueProgress}
+          />
+        );
       case "shopBtn":
         return (
           <ShopPage
@@ -75,12 +88,14 @@ function App() {
             setTotalValue={setTotalValue}
             setValueProgress={setValueProgress}
             valueProgress={valueProgress}
+            ownedArtifacts={ownedArtifacts}
+            setOwnedArtifacts={setOwnedArtifacts}
           />
         );
       case "upgradesBtn":
         return <UpgradesPage />;
       case "bettingBtn":
-        return <BettingPage />;
+        return <BettingPage setBalance={setBalance} balance={balance}/>;
       default:
         return <ExtractPage />;
     }

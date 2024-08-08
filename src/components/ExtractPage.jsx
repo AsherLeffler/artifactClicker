@@ -16,25 +16,31 @@ const ExtractPage = ({ balance, setBalance }) => {
   useEffect(() => {
     if (randomMoney !== 0) {
       const addedMoney = document.createElement("p");
+      const currency = document.createElement('i');
+      const container = document.createElement('div');
       addedMoney.textContent = randomMoney.toFixed(2);
+      currency.classList.add('fa-solid', 'fa-coins');
       addedMoney.classList.add("extractedMoney");
-      addedMoney.style.left = `${Math.random() * (63 - 38) + 38}%`;
-      addedMoney.style.top = `${Math.random() * (34 - 24) + 24}%`;
-      document.querySelector(".extractPage").appendChild(addedMoney);
-      addedMoney.classList.add("display");
+      container.classList.add('extractedMoneyCont');
+      container.style.left = `${Math.random() * (62 - 32) + 32}%`;
+      container.style.top = `${Math.random() * (34 - 24) + 24}%`;
+      document.querySelector(".extractPage").appendChild(container);
+      container.appendChild(currency);
+      container.appendChild(addedMoney);
+      container.classList.add("display");
       setTimeout(() => {
-        document.querySelector(".extractedMoney").classList.remove("display");
+        document.querySelector(".extractedMoneyCont").classList.remove("display");
         setTimeout(() => {
           document
             .querySelector(".extractPage")
-            .removeChild(document.querySelector(".extractedMoney"));
+            .removeChild(document.querySelector(".extractedMoneyCont"));
         }, 150);
       }, 1000);
     }
   }, [randomMoney]);
   return (
     <div className="rightPage extractPage">
-      <i className="fa-regular fa-gem" onClick={handleGemClick}></i>
+      <i className="fa-regular fa-gem icon" onClick={handleGemClick}></i>
     </div>
   );
 };
