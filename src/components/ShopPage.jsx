@@ -1264,7 +1264,7 @@ const ShopPage = ({
           rarity: "Uncommon",
         },
         {
-          img: "/src/assets/artifactImages/coreShard.png",
+          img: "/src/assets/artifactImages/starCoreShard.png",
           name: "Core Shard",
           value: 304899,
           rarity: "Uncommon",
@@ -1369,7 +1369,7 @@ const ShopPage = ({
           rarity: "Common",
         },
         {
-          img: "/src/assets/artifactImages/energyVortex.png",
+          img: "/src/assets/artifactImages/energyVortex.jpg",
           name: "Energy Vortex",
           value: 1473283,
           rarity: "Uncommon",
@@ -1540,7 +1540,7 @@ const ShopPage = ({
           rarity: "Rare",
         },
         {
-          img: "/src/assets/artifactImages/dimensionalPortal.png",
+          img: "/src/assets/artifactImages/dimensionalPortal.jpg",
           name: "Dimensional Portal",
           value: 30121434,
           rarity: "Rare",
