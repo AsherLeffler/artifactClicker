@@ -12,6 +12,7 @@ const InventoryPage = ({
 }) => {
   const [activePage, setActivePage] = useState("inventoryMenu");
   const [activeItem, setActiveItem] = useState(null);
+  const [openActiveItem, setOpenActiveItem] = useState(null);
   return (
     <>
       {activePage === "inventoryMenu" && (
@@ -23,6 +24,7 @@ const InventoryPage = ({
               sampleImg={ownedArtifact.itemID.image}
               sampleName={ownedArtifact.itemID.name}
               setOwnedArtifacts={setOwnedArtifacts}
+              ownedArtifacts={ownedArtifacts}
               balance={balance}
               setBalance={setBalance}
               levelValue={levelValue}
@@ -33,11 +35,14 @@ const InventoryPage = ({
               setActivePage={setActivePage}
               activeItem={activeItem}
               setActiveItem={setActiveItem}
+              openActiveItem={openActiveItem}
+              setOpenActiveItem={setOpenActiveItem}
             />
           ))}
         </div>
       )}
       {activePage === "itemMenu" && activeItem}
+      {activePage === "openSample" && openActiveItem}
     </>
   );
 };
@@ -56,6 +61,7 @@ const OwnedSample = ({
   sampleName,
   sampleImg,
   setOwnedArtifacts,
+  ownedArtifacts,
   balance,
   setBalance,
   levelValue,
@@ -66,6 +72,8 @@ const OwnedSample = ({
   setActivePage,
   activeItem,
   setActiveItem,
+  openActiveItem,
+  setOpenActiveItem,
 }) => {
   function handleSell() {
     setBalance((prevBalance) => prevBalance + Math.floor(itemID.price * 0.6));
@@ -80,16 +88,80 @@ const OwnedSample = ({
     setValueProgress(newValueProgress);
     document.getElementById("progressBar").style.width = `${newValueProgress}%`;
   }
-  const setPage = () => {
-    setActivePage("inventoryMenu");
+  const setPage = (page) => {
+    setActivePage(page);
   };
-  function createItemComponent(image, name, artifacts) {
+
+  function createItemComponent(image, name, artifacts, sampleAmount) {
+    let nameCounts = {};
+
+    ownedArtifacts.forEach((element) => {
+      if (nameCounts[element.itemID.name]) {
+        nameCounts[element.itemID.name]++;
+      } else {
+        nameCounts[element.itemID.name] = 1;
+      }
+    });
+    const checkSampleAmount = () => {
+      const sampleAmount = nameCounts[name] || 0;
+      return sampleAmount;
+    };
+    const checkHandleOpenSample = (num) => {
+      if (checkSampleAmount() >= num) {
+        handleOpenSample(num);
+      }
+    };
+
     return (
       <div className="rightPage itemMenu">
         <div className="openMenu">
           <img src={image} alt={`${name} image`} className="openedItemImg" />
           <h1>{name}</h1>
-          <button onClick={setPage}>Exit</button>
+          <div className="buttonsWrapper">
+            <button
+              className={`openAmount ${
+                checkSampleAmount() >= 1 ? "canOpen" : "cannotOpen"
+              }`}
+              onClick={() => checkHandleOpenSample(1)}
+            >
+              Open x1
+            </button>
+            <button
+              className={`openAmount ${
+                checkSampleAmount() >= 2 ? "canOpen" : "cannotOpen"
+              }`}
+              onClick={() => checkHandleOpenSample(2)}
+            >
+              Open x2
+            </button>
+            <button
+              className={`openAmount ${
+                checkSampleAmount() >= 3 ? "canOpen" : "cannotOpen"
+              }`}
+              onClick={() => checkHandleOpenSample(3)}
+            >
+              Open x3
+            </button>
+            <button
+              className={`openAmount ${
+                checkSampleAmount() >= 4 ? "canOpen" : "cannotOpen"
+              }`}
+              onClick={() => checkHandleOpenSample(4)}
+            >
+              Open x4
+            </button>
+            <button
+              className={`openAmount ${
+                checkSampleAmount() >= 5 ? "canOpen" : "cannotOpen"
+              }`}
+              onClick={() => checkHandleOpenSample(5)}
+            >
+              Open x5
+            </button>
+          </div>
+          <button className="exit" onClick={() => setPage("inventoryMenu")}>
+            Exit
+          </button>
           <div className="artifactsShowcase">
             {artifacts.map((artifact) => (
               <CreateArtifact artifact={artifact} key={artifact.name} />
@@ -99,23 +171,74 @@ const OwnedSample = ({
       </div>
     );
   }
+  const openScene = (amountToOpen) => {
+    return (
+      <div className="rightPage openingScene">
+        {amountToOpen == 1 && <div>This Is One Object</div>}
+        {amountToOpen == 2 && (
+          <>
+            <div>These Are Two Objects</div>
+            <div>These Are Two Objects</div>
+          </>
+        )}
+        {amountToOpen == 3 && (
+          <>
+            <div>These Are Three Objects</div>
+            <div>These Are Three Objects</div>
+            <div>These Are Three Objects</div>
+          </>
+        )}
+        {amountToOpen == 4 && (
+          <>
+            <div>These Are Four Objects</div>
+            <div>These Are Four Objects</div>
+            <div>These Are Four Objects</div>
+            <div>These Are Four Objects</div>
+          </>
+        )}
+        {amountToOpen == 5 && (
+          <>
+            <div>These Are Five Objects</div>
+            <div>These Are Five Objects</div>
+            <div>These Are Five Objects</div>
+            <div>These Are Five Objects</div>
+            <div>These Are Five Objects</div>
+          </>
+        )}
+      </div>
+    );
+  };
+  const handleOpenSample = (amountToOpen) => {
+    setOpenActiveItem(openScene(amountToOpen));
+    setPage("openSample");
+
+    setOwnedArtifacts((prevOwnedArtifacts) => {
+      let count = amountToOpen;
+      return prevOwnedArtifacts.filter((artifact) => {
+        if (count <= 0) {
+          return true;
+        }
+  
+        if (artifact.itemID === itemID) {
+          count--;
+          return false;
+        }
+  
+        return true;
+      });
+    });
+    const newTotalValue = totalValue - itemID.price;
+    const newValueProgress = ((levelValue - newTotalValue) / levelValue) * 100;
+    setTotalValue(newTotalValue);
+    setValueProgress(newValueProgress);
+    document.getElementById("progressBar").style.width = `${newValueProgress}%`;
+  };
   const handleOpen = () => {
-    // setOwnedArtifacts((prevOwnedArtifacts) =>
-    //   prevOwnedArtifacts.filter(
-    //     (ownedArtifact) => ownedArtifact.itemID !== itemID
-    //   )
-    // );
-    // const newTotalValue = totalValue - itemID.price;
-    // const newValueProgress = ((levelValue - newTotalValue) / levelValue) * 100;
     setActiveItem(
       createItemComponent(itemID.image, itemID.name, itemID.artifacts)
     );
     setActivePage("itemMenu");
-    // setTotalValue(newTotalValue);
-    // setValueProgress(newValueProgress);
-    // document.getElementById("progressBar").style.width = `${newValueProgress}%`;
   };
-  useEffect(() => {}, [activeItem]);
   const sellValue = Math.floor(itemID.price * 0.6);
   return (
     <div className="artifact">
