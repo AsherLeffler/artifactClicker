@@ -12,10 +12,22 @@ function App() {
   const [totalValue, setTotalValue] = useState(0);
   const [valueProgress, setValueProgress] = useState(100);
   const [levelValue, setLevelValue] = useState(100);
-  const [balance, setBalance] = useState(1000000000);
+  const [balance, setBalance] = useState(10000000000);
   const [levelID, setLevelID] = useState(2);
   const [moreValueNeeded, setMoreValueNeeded] = useState(100);
   const [ownedArtifacts, setOwnedArtifacts] = useState([]);
+  const [clayIsFound, setClayIsFound] = useState(false);
+  const [stoneIsFound, setStoneIsFound] = useState(false);
+  const [oceanIsFound, setOceanIsFound] = useState(false);
+  const [quartzIsFound, setQuartzIsFound] = useState(false);
+  const [crystalIsFound, setCrystalIsFound] = useState(false);
+  const [obsidianIsFound, setObsidianIsFound] = useState(false);
+  const [moonIsFound, setMoonIsFound] = useState(false);
+  const [meteorIsFound, setMeteorIsFound] = useState(false);
+  const [alienIsFound, setAlienIsFound] = useState(false);
+  const [starIsFound, setStarIsFound] = useState(false);
+  const [blackIsFound, setBlackIsFound] = useState(false);
+  const [cosmicIsFound, setCosmicIsFound] = useState(false);
 
   useEffect(() => {
     if (totalValue >= levelValue) {
@@ -35,6 +47,8 @@ function App() {
             return 1000000;
           case 8:
             return 1000000000;
+          case 9:
+            return 100000000000;
         }
       }
       document.getElementById("progressBar").style.width = `${
@@ -42,14 +56,14 @@ function App() {
       }%`;
       setLevelValue(newLevelValue());
       setValueProgress(newLevelValue() - totalValue);
-      if (levelID == 8) {
+      if (levelID == 9) {
       } else {
         setLevelID((prevLevelID) => prevLevelID + 1);
       }
     } else {
       setValueProgress(((levelValue - totalValue) / levelValue) * 100);
     }
-    if (levelID == 8) {
+    if (levelID == 9) {
       setMoreValueNeeded(0);
     } else {
       setMoreValueNeeded(levelValue - totalValue);
@@ -60,6 +74,7 @@ function App() {
     setActiveButton(e.target.id);
     setCurrentPage(e.target.id);
   }
+
   function renderCurrentPage() {
     switch (currentPage) {
       case "extractBtn":
@@ -76,6 +91,18 @@ function App() {
             setTotalValue={setTotalValue}
             setValueProgress={setValueProgress}
             valueProgress={valueProgress}
+            setClayIsFound={setClayIsFound}
+            setStoneIsFound={setStoneIsFound}
+            setOceanIsFound={setOceanIsFound}
+            setQuartzIsFound={setQuartzIsFound}
+            setCrystalIsFound={setCrystalIsFound}
+            setObsidianIsFound={setObsidianIsFound}
+            setMoonIsFound={setMoonIsFound}
+            setMeteorIsFound={setMeteorIsFound}
+            setAlienIsFound={setAlienIsFound}
+            setStarIsFound={setStarIsFound}
+            setBlackIsFound={setBlackIsFound}
+            setCosmicIsFound={setCosmicIsFound}
           />
         );
       case "shopBtn":
@@ -90,6 +117,18 @@ function App() {
             valueProgress={valueProgress}
             ownedArtifacts={ownedArtifacts}
             setOwnedArtifacts={setOwnedArtifacts}
+            clayIsFound={clayIsFound}
+            stoneIsFound={stoneIsFound}
+            oceanIsFound={oceanIsFound}
+            quartzIsFound={quartzIsFound}
+            crystalIsFound={crystalIsFound}
+            obsidianIsFound={obsidianIsFound}
+            moonIsFound={moonIsFound}
+            meteorIsFound={meteorIsFound}
+            alienIsFound={alienIsFound}
+            starIsFound={starIsFound}
+            blackIsFound={blackIsFound}
+            cosmicIsFound={cosmicIsFound}
           />
         );
       case "upgradesBtn":

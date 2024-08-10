@@ -1,7 +1,11 @@
+:root{
+  overflow-x: hidden;
+}
 #mainBody {
   width: 100vw;
   height: 100vh;
   display: flex;
+  overflow-x: hidden;
 }
 #leftMenu {
   background-color: rgb(53, 53, 53);
@@ -190,14 +194,14 @@
   font-size: 1.3rem;
   margin-top: 20px;
 }
-.buttonsWrapper .canOpen{
+.buttonsWrapper .canOpen {
   background-color: #262626;
   cursor: pointer;
 }
-.buttonsWrapper .cannotOpen{
+.buttonsWrapper .cannotOpen {
   background-color: #4f4f4f;
 }
-.buttonsWrapper .canOpen:hover{
+.buttonsWrapper .canOpen:hover {
   background-color: #141414;
 }
 .openMenu img {
@@ -246,9 +250,16 @@
     rgb(68, 30, 8),
     rgb(123, 45, 0)
   );
+  color: white;
 }
 .Common {
-  background: linear-gradient(90deg, rgb(48, 48, 48), rgb(86, 86, 86), rgb(48, 48, 48));
+  background: linear-gradient(
+    90deg,
+    rgb(48, 48, 48),
+    rgb(86, 86, 86),
+    rgb(48, 48, 48)
+  );
+  color: white;
 }
 .Uncommon {
   background: linear-gradient(
@@ -257,6 +268,7 @@
     rgb(14, 105, 0),
     rgb(60, 156, 45)
   );
+  color: white;
 }
 .Rare {
   background: linear-gradient(
@@ -265,6 +277,7 @@
     rgb(0, 16, 160),
     rgb(12, 62, 213)
   );
+  color: white;
 }
 .Unique {
   background: linear-gradient(
@@ -273,6 +286,7 @@
     rgb(77, 0, 132),
     rgb(130, 0, 197)
   );
+  color: white;
 }
 .Mythical {
   background: linear-gradient(
@@ -281,6 +295,7 @@
     rgb(94, 0, 0),
     rgb(142, 11, 11)
   );
+  color: white;
 }
 .Godly {
   background: linear-gradient(
@@ -293,15 +308,193 @@
     rgb(0, 28, 141),
     rgb(53, 0, 100)
   );
+  color: white;
 }
-.buttonsWrapper{
+.buttonsWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.openingScene{
+.openingScene {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  overflow-y: hidden;
+}
+.openDropCont {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@keyframes shake {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  4% {
+    transform: rotateZ(25deg);
+  }
+  8% {
+    transform: rotateZ(-25deg);
+  }
+  12% {
+    transform: rotateZ(23deg);
+  }
+  16% {
+    transform: rotateZ(-23deg);
+  }
+  24% {
+    transform: rotateZ(21deg);
+  }
+  28% {
+    transform: rotateZ(-21deg);
+  }
+  32% {
+    transform: rotateZ(19deg);
+  }
+  36% {
+    transform: rotateZ(-19deg);
+  }
+  40% {
+    transform: rotateZ(17deg);
+  }
+  44% {
+    transform: rotateZ(-17deg);
+  }
+  48% {
+    transform: rotateZ(15deg);
+  }
+  52% {
+    transform: rotateZ(-15deg);
+  }
+  56% {
+    transform: rotateZ(13deg);
+  }
+  60% {
+    transform: rotateZ(-13deg);
+  }
+  64% {
+    transform: rotateZ(11deg);
+  }
+  68% {
+    transform: rotateZ(-11deg);
+  }
+  72% {
+    transform: rotateZ(9deg);
+  }
+  76% {
+    transform: rotateZ(-9deg);
+  }
+  80% {
+    transform: rotateZ(7deg);
+  }
+  84% {
+    transform: rotateZ(-7deg);
+  }
+  88% {
+    transform: rotateZ(5deg);
+  }
+  92% {
+    transform: rotateZ(-5deg);
+  }
+  96% {
+    transform: rotateZ(3deg);
+  }
+  100% {
+    transform: rotateZ(0deg);
+  }
+}
+.appear{
+  position: absolute;
+  bottom: 3%;
+}
+.shake {
+  animation: shake 4s ease-in-out;
+}
+.openImg1 {
+  width: 35%;
+  aspect-ratio: 1 / 1;
+}
+.openImg2 {
+  width: 26%;
+  aspect-ratio: 1 / 1;
+}
+.openImg3 {
+  width: 24%;
+  aspect-ratio: 1 / 1;
+}
+.openImg4 {
+  width: 18%;
+  min-width: 180px;
+  aspect-ratio: 1 / 1;
+}
+.openImg5 {
+  width: 20%;
+  aspect-ratio: 1 / 1;
+}
+.collectButton {
+  width: 15%;
+  aspect-ratio: 1 / 0.4;
+  background-color: rgb(70, 70, 70);
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: "Antic", sans-serif;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 1s;
+}
+.TerribleGlow {
+  box-shadow: 0 0 6px 6px rgb(123, 45, 0);
+  background-color: rgba(123, 45, 0, 0.2);
+  border-radius: 50%;
+  padding: 10px;
+}
+.CommonGlow {
+  box-shadow: 0 0 6px 6px rgb(86, 86, 86);
+  background-color: rgba(86, 86, 86, 0.2);
+  border-radius: 50%;
+  padding: 10px;
+}
+.UncommonGlow {
+  box-shadow: 0 0 6px 6px rgb(60, 156, 45);
+  background-color: rgba(60, 156, 45, 0.2);
+  border-radius: 50%;
+  padding: 10px;
+}
+.RareGlow {
+  box-shadow: 0 0 6px 6px rgb(12, 62, 213);
+  background-color: rgba(12, 62, 213, 0.2);
+  border-radius: 50%;
+  padding: 10px;
+}
+.UniqueGlow {
+  box-shadow: 0 0 6px 6px rgb(130, 0, 197);
+  background-color: rgba(131, 0, 197, 0.2);
+  border-radius: 50%;
+  padding: 10px;
+}
+.MythicalGlow {
+  box-shadow: 0 0 6px 6px rgb(142, 11, 11);
+  background-color: rgba(142, 11, 11, 0.2);
+  border-radius: 50%;
+  padding: 10px;
+}
+.GodlyGlow {
+  box-shadow: 0 0 25px 25px rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  padding: 10px;
+}
+.canPressCollect{
+  background-color: rgb(52, 133, 255);
+}
+.canPressCollect:hover{
+  background-color: rgb(16, 80, 177);
+}
+.openBottom{
+  margin-bottom: 100px;
 }

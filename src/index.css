@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  overflow-y: hidden;
 }
 .rightPage {
   flex: 0.8;
@@ -24,21 +25,23 @@ body {
 .artifact {
   width: calc(25% - 15px);
   aspect-ratio: 1 / 1;
-  background: linear-gradient(
-    90deg,
-    rgb(40, 40, 40),
-    rgb(53, 53, 53),
-    rgb(40, 40, 40)
-  );
   margin: 7.5px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   text-align: center;
-  color: rgb(108, 108, 108);
   font-family: "Antic", sans-serif;
   align-items: center;
+}
+.normal{
+  background: linear-gradient(
+    90deg,
+    rgb(40, 40, 40),
+    rgb(53, 53, 53),
+    rgb(40, 40, 40)
+  );
+  color: rgb(108, 108, 108);
 }
 .artifact img {
   width: 60%;

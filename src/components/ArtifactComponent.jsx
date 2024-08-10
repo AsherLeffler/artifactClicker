@@ -12,7 +12,7 @@ const ArtifactComponent = ({
   setOwnedArtifacts
 }) => {
   function handleValueChange(sampleValue) {
-    const newTotalValue = totalValue + sampleValue;
+    const newTotalValue = Math.round(totalValue + sampleValue);
     const newValueProgress = ((levelValue - newTotalValue) / levelValue) * 100;
 
     setTotalValue(newTotalValue);
@@ -37,7 +37,7 @@ const ArtifactComponent = ({
     }
   }
   return (
-    <div className="artifact">
+    <div className="artifact normal">
       <img src={itemID.image} alt={itemID.name} id={itemID.name} />
       <h2>{itemID.name}</h2>
       <button

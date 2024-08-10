@@ -9,22 +9,73 @@ const InventoryPage = ({
   totalValue,
   setTotalValue,
   setValueProgress,
+  setClayIsFound,
+  setStoneIsFound,
+  setOceanIsFound,
+  setQuartzIsFound,
+  setCrystalIsFound,
+  setObsidianIsFound,
+  setMoonIsFound,
+  setMeteorIsFound,
+  setAlienIsFound,
+  setStarIsFound,
+  setBlackIsFound,
+  setCosmicIsFound,
 }) => {
   const [activePage, setActivePage] = useState("inventoryMenu");
   const [activeItem, setActiveItem] = useState(null);
   const [openActiveItem, setOpenActiveItem] = useState(null);
+  const [sortedArtifacts, setSortedArtifacts] = useState([]);
+
+  const getArtifactValue = (artifact) => {
+    return artifact.itemID?.price || artifact.newArtifact?.value || 0;
+  };
+
+  useEffect(() => {
+    const sorted = [...ownedArtifacts].sort(
+      (a, b) => getArtifactValue(b) - getArtifactValue(a)
+    );
+    setSortedArtifacts(sorted);
+    if (ownedArtifacts.length === 0) {
+      const newTotalValue = 0;
+      const newValueProgress =
+        ((levelValue - newTotalValue) / levelValue) * 100;
+      setTotalValue(newTotalValue);
+      setValueProgress(newValueProgress);
+      document.getElementById(
+        "progressBar"
+      ).style.width = `${newValueProgress}%`;
+    }
+  }, [ownedArtifacts]);
+
   return (
     <>
       {activePage === "inventoryMenu" && (
         <div className="rightPage inventoryPage">
-          {ownedArtifacts.map((ownedArtifact, index) => (
+          {sortedArtifacts.map((ownedArtifact, index) => (
             <OwnedSample
-              key={`${ownedArtifact.itemID.name}-${index}`}
-              itemID={ownedArtifact.itemID}
-              sampleImg={ownedArtifact.itemID.image}
-              sampleName={ownedArtifact.itemID.name}
+              key={`${
+                ownedArtifact.itemID
+                  ? `${ownedArtifact.itemID?.name}-${index}`
+                  : `${ownedArtifact?.name}-${index}`
+              }`}
+              itemID={
+                ownedArtifact.itemID
+                  ? ownedArtifact?.itemID
+                  : ownedArtifact?.newArtifact
+              }
+              sampleImg={
+                ownedArtifact.itemID
+                  ? ownedArtifact.itemID?.image
+                  : ownedArtifact.newArtifact?.img
+              }
+              sampleName={
+                ownedArtifact.itemID
+                  ? ownedArtifact.itemID?.name
+                  : ownedArtifact.newArtifact?.name
+              }
               setOwnedArtifacts={setOwnedArtifacts}
-              ownedArtifacts={ownedArtifacts}
+              ownedArtifacts={sortedArtifacts}
               balance={balance}
               setBalance={setBalance}
               levelValue={levelValue}
@@ -37,6 +88,18 @@ const InventoryPage = ({
               setActiveItem={setActiveItem}
               openActiveItem={openActiveItem}
               setOpenActiveItem={setOpenActiveItem}
+              setClayIsFound={setClayIsFound}
+              setStoneIsFound={setStoneIsFound}
+              setOceanIsFound={setOceanIsFound}
+              setQuartzIsFound={setQuartzIsFound}
+              setCrystalIsFound={setCrystalIsFound}
+              setObsidianIsFound={setObsidianIsFound}
+              setMoonIsFound={setMoonIsFound}
+              setMeteorIsFound={setMeteorIsFound}
+              setAlienIsFound={setAlienIsFound}
+              setStarIsFound={setStarIsFound}
+              setBlackIsFound={setBlackIsFound}
+              setCosmicIsFound={setCosmicIsFound}
             />
           ))}
         </div>
@@ -52,10 +115,11 @@ const CreateArtifact = ({ artifact }) => {
       {artifact.isFound !== false && (
         <img src={artifact.img} alt={`${artifact.name} Image`} />
       )}
-      <h2>{artifact.name}</h2>
+      <h2>{artifact?.isFound ? artifact.hiddenName : artifact.name}</h2>
     </div>
   );
 };
+
 const OwnedSample = ({
   itemID,
   sampleName,
@@ -74,15 +138,45 @@ const OwnedSample = ({
   setActiveItem,
   openActiveItem,
   setOpenActiveItem,
+  setClayIsFound,
+  setStoneIsFound,
+  setOceanIsFound,
+  setQuartzIsFound,
+  setCrystalIsFound,
+  setObsidianIsFound,
+  setMoonIsFound,
+  setMeteorIsFound,
+  setAlienIsFound,
+  setStarIsFound,
+  setBlackIsFound,
+  setCosmicIsFound,
 }) => {
+  const [isShaking, setIsShaking] = useState(false);
+  const [canCollect, setCanCollect] = useState(false);
+  function test() {
+    setIsShaking(true);
+    setCanCollect(true);
+  }
+
+  useEffect(() => {
+    test();
+  }, [OwnedSample]);
   function handleSell() {
-    setBalance((prevBalance) => prevBalance + Math.floor(itemID.price * 0.6));
+    const sellAmount = itemID.price
+      ? Math.floor(itemID.price * 0.6)
+      : itemID.value;
+    setBalance((prevBalance) => prevBalance + sellAmount);
     setOwnedArtifacts((prevOwnedArtifacts) =>
       prevOwnedArtifacts.filter(
-        (ownedArtifact) => ownedArtifact.itemID !== itemID
+        (ownedArtifact) =>
+          (ownedArtifact.itemID
+            ? ownedArtifact.itemID
+            : ownedArtifact.newArtifact) !== itemID
       )
     );
-    const newTotalValue = totalValue - itemID.price;
+    const newTotalValue = Math.round(
+      totalValue - (itemID.price ? itemID.price : itemID.value)
+    );
     const newValueProgress = ((levelValue - newTotalValue) / levelValue) * 100;
     setTotalValue(newTotalValue);
     setValueProgress(newValueProgress);
@@ -91,15 +185,16 @@ const OwnedSample = ({
   const setPage = (page) => {
     setActivePage(page);
   };
-
   function createItemComponent(image, name, artifacts, sampleAmount) {
     let nameCounts = {};
-
-    ownedArtifacts.forEach((element) => {
-      if (nameCounts[element.itemID.name]) {
-        nameCounts[element.itemID.name]++;
+    const ownedSamples = ownedArtifacts.filter(
+      (ownedArtifact) => !ownedArtifact.newArtifact
+    );
+    ownedSamples.forEach((element) => {
+      if (nameCounts[element.itemID?.name]) {
+        nameCounts[element.itemID?.name]++;
       } else {
-        nameCounts[element.itemID.name] = 1;
+        nameCounts[element.itemID?.name] = 1;
       }
     });
     const checkSampleAmount = () => {
@@ -164,95 +259,364 @@ const OwnedSample = ({
           </button>
           <div className="artifactsShowcase">
             {artifacts.map((artifact) => (
-              <CreateArtifact artifact={artifact} key={artifact.name} />
+              <CreateArtifact artifact={artifact} key={artifact?.name} />
             ))}
           </div>
         </div>
       </div>
     );
   }
+  let done = false;
   const openScene = (amountToOpen) => {
+    const handleCollect = () => {
+      const image = document.querySelector(".indentifyer");
+      if(done){
+        setPage("inventoryMenu");
+      }
+    };
     return (
       <div className="rightPage openingScene">
-        {amountToOpen == 1 && <div>This Is One Object</div>}
-        {amountToOpen == 2 && (
+        {amountToOpen === 1 && (
           <>
-            <div>These Are Two Objects</div>
-            <div>These Are Two Objects</div>
+            <div className="openDropCont">
+              <img
+                className={`openImg1 indentifyer ${isShaking ? "shake" : ""}`}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+            </div>
+            {canCollect && (
+              <div className="openDropCont appear">
+                <button onClick={handleCollect} className="collectButton">
+                  Collect
+                </button>
+              </div>
+            )}
           </>
         )}
-        {amountToOpen == 3 && (
+        {amountToOpen === 2 && (
           <>
-            <div>These Are Three Objects</div>
-            <div>These Are Three Objects</div>
-            <div>These Are Three Objects</div>
+            <div className="openDropCont">
+              <img
+                className={`openImg2 indentifyer ${isShaking ? "shake" : ""}`}
+                style={{ marginRight: "40px" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+              <img
+                className={`openImg2 indentifyer ${isShaking ? "shake" : ""}`}
+                style={{ marginLeft: "40px" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+            </div>
+            {canCollect && (
+              <div className="openDropCont appear">
+                <button onClick={handleCollect} className="collectButton">
+                  Collect
+                </button>
+              </div>
+            )}
           </>
         )}
-        {amountToOpen == 4 && (
+        {amountToOpen === 3 && (
           <>
-            <div>These Are Four Objects</div>
-            <div>These Are Four Objects</div>
-            <div>These Are Four Objects</div>
-            <div>These Are Four Objects</div>
+            <div className="openDropCont">
+              <img
+                className={`openImg3 indentifyer ${isShaking ? "shake" : ""}`}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+            </div>
+            <div className="openDropCont openBottom">
+              <img
+                className={`openImg3 indentifyer ${isShaking ? "shake" : ""}`}
+                style={{ marginRight: "40px" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+              <img
+                className={`openImg3 indentifyer ${isShaking ? "shake" : ""}`}
+                style={{ marginLeft: "40px" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+            </div>
+            {canCollect && (
+              <div className="openDropCont appear">
+                <button onClick={handleCollect} className="collectButton">
+                  Collect
+                </button>
+              </div>
+            )}
           </>
         )}
-        {amountToOpen == 5 && (
+        {amountToOpen === 4 && (
           <>
-            <div>These Are Five Objects</div>
-            <div>These Are Five Objects</div>
-            <div>These Are Five Objects</div>
-            <div>These Are Five Objects</div>
-            <div>These Are Five Objects</div>
+            <div className="openDropCont">
+              <img
+                className={`openImg4 indentifyer ${isShaking ? "shake" : ""}`}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+            </div>
+            <div className="openDropCont">
+              <img
+                className={`openImg4 indentifyer ${isShaking ? "shake" : ""}`}
+                src={itemID?.image}
+                alt={itemID?.name}
+                style={{ marginRight: "90px" }}
+              />
+              <img
+                className={`openImg4 indentifyer ${isShaking ? "shake" : ""}`}
+                src={itemID?.image}
+                alt={itemID?.name}
+                style={{ marginLeft: "90px" }}
+              />
+            </div>
+            <div className="openDropCont openBottom">
+              <img
+                className={`openImg4 indentifyer ${isShaking ? "shake" : ""}`}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+            </div>
+            {canCollect && (
+              <div className="openDropCont appear">
+                <button onClick={handleCollect} className="collectButton">
+                  Collect
+                </button>
+              </div>
+            )}
+          </>
+        )}
+        {amountToOpen === 5 && (
+          <>
+            <div className="openDropCont">
+              <img
+                className={`openImg5 indentifyer ${isShaking ? "shake" : ""}`}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+            </div>
+            <div className="openDropCont">
+              <img
+                className={`openImg5 indentifyer ${isShaking ? "shake" : ""}`}
+                style={{ marginRight: "90px" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+              <img
+                className={`openImg5 indentifyer ${isShaking ? "shake" : ""}`}
+                style={{ marginLeft: "90px" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+            </div>
+            <div className="openDropCont openBottom" style={{ marginTop: "20px" }}>
+              <img
+                className={`openImg5 indentifyer ${isShaking ? "shake" : ""}`}
+                style={{ marginRight: "20px" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+              <img
+                className={`openImg5 indentifyer ${isShaking ? "shake" : ""}`}
+                style={{ marginLeft: "20px" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+            </div>
+            {canCollect && (
+              <div className="openDropCont appear">
+                <button onClick={handleCollect} className="collectButton">
+                  Collect
+                </button>
+              </div>
+            )}
           </>
         )}
       </div>
     );
   };
-  const handleOpenSample = (amountToOpen) => {
-    setOpenActiveItem(openScene(amountToOpen));
-    setPage("openSample");
-
-    setOwnedArtifacts((prevOwnedArtifacts) => {
-      let count = amountToOpen;
-      return prevOwnedArtifacts.filter((artifact) => {
-        if (count <= 0) {
-          return true;
+  const generateNewArtifact = (amountToOpen, valueAfterDropReduced) => {
+    let valueToAdd = 0;
+    const switchRandom = document.querySelectorAll(".indentifyer");
+    for (let i = 0; i < amountToOpen; i++) {
+      const randomNumber = Math.round(Math.random() * (20 - 1) + 1);
+      let newArtifact = itemID?.artifacts[randomNumber];
+      setOwnedArtifacts((prevOwnedArtifacts) => [
+        ...prevOwnedArtifacts,
+        { newArtifact },
+      ]);
+      if (!newArtifact) {
+        console.log('Caught Error');
+        newArtifact = itemID?.artifacts[Math.round(Math.random() * (20 - 1) + 1)];
+        valueToAdd += newArtifact?.value;
+        switchRandom[i].setAttribute("src", newArtifact?.img);
+        switchRandom[i].setAttribute("alt", "Not Rendering");
+        switchRandom[i].style.width = "15%";
+        switchRandom[i].classList.add(`${newArtifact?.rarity}Glow`);
+        if (
+          newArtifact?.rarity === "Mythical" ||
+          newArtifact?.rarity === "Godly"
+        ) {
+          switch (itemID?.name) {
+            case "Clay Sample":
+              setClayIsFound(true);
+              break;
+            case "Stone Sample":
+              setStoneIsFound(true);
+              break;
+            case "Ocean Rock Sample":
+              setOceanIsFound(true);
+              break;
+            case "Quartz Sample":
+              setQuartzIsFound(true);
+              break;
+            case "Crystal Sample":
+              setCrystalIsFound(true);
+              break;
+            case "Obsidian Sample":
+              setObsidianIsFound(true);
+              break;
+            case "Moon Rock Sample":
+              setMoonIsFound(true);
+              break;
+            case "Meteor Sample":
+              setMeteorIsFound(true);
+              break;
+            case "Alien Rock Sample":
+              setAlienIsFound(true);
+              break;
+            case "Star Core Sample":
+              setStarIsFound(true);
+              break;
+            case "Black Hole Sample":
+              setBlackIsFound(true);
+              break;
+            case "Cosmic Energy Sample":
+              setCosmicIsFound(true);
+              break;
+          }
         }
-  
-        if (artifact.itemID === itemID) {
-          count--;
-          return false;
+      } else {
+        valueToAdd += newArtifact?.value;
+        switchRandom[i].setAttribute("src", newArtifact?.img);
+        switchRandom[i].setAttribute("alt", "Not Rendering");
+        switchRandom[i].style.width = "15%";
+        switchRandom[i].classList.add(`${newArtifact?.rarity}Glow`);
+        if (
+          newArtifact?.rarity === "Mythical" ||
+          newArtifact?.rarity === "Godly"
+        ) {
+          switch (itemID?.name) {
+            case "Clay Sample":
+              setClayIsFound(true);
+              break;
+            case "Stone Sample":
+              setStoneIsFound(true);
+              break;
+            case "Ocean Rock Sample":
+              setOceanIsFound(true);
+              break;
+            case "Quartz Sample":
+              setQuartzIsFound(true);
+              break;
+            case "Crystal Sample":
+              setCrystalIsFound(true);
+              break;
+            case "Obsidian Sample":
+              setObsidianIsFound(true);
+              break;
+            case "Moon Rock Sample":
+              setMoonIsFound(true);
+              break;
+            case "Meteor Sample":
+              setMeteorIsFound(true);
+              break;
+            case "Alien Rock Sample":
+              setAlienIsFound(true);
+              break;
+            case "Star Core Sample":
+              setStarIsFound(true);
+              break;
+            case "Black Hole Sample":
+              setBlackIsFound(true);
+              break;
+            case "Cosmic Energy Sample":
+              setCosmicIsFound(true);
+              break;
+          }
         }
-  
-        return true;
-      });
-    });
-    const newTotalValue = totalValue - itemID.price;
+      }
+    }
+    const newTotalValue = valueAfterDropReduced + valueToAdd;
     const newValueProgress = ((levelValue - newTotalValue) / levelValue) * 100;
     setTotalValue(newTotalValue);
     setValueProgress(newValueProgress);
     document.getElementById("progressBar").style.width = `${newValueProgress}%`;
   };
+  const handleOpenSample = (amountToOpen) => {
+    setOpenActiveItem(openScene(amountToOpen));
+    setPage("openSample");
+    setOwnedArtifacts((prevOwnedArtifacts) => {
+      let count = amountToOpen;
+      return prevOwnedArtifacts.filter((artifact) => {
+        if (artifact.itemID?.name === itemID?.name && count > 0) {
+          count--;
+          return false; // Remove this item
+        }
+        return true; // Keep this item
+      });
+    });
+    const newTotalValue = Math.round(totalValue - itemID?.price * amountToOpen);
+    const newValueProgress = ((levelValue - newTotalValue) / levelValue) * 100;
+    setTotalValue(newTotalValue);
+    setValueProgress(newValueProgress);
+    document.getElementById("progressBar").style.width = `${newValueProgress}%`;
+    setTimeout(() => {
+      setIsShaking(false);
+      generateNewArtifact(amountToOpen, newTotalValue);
+      done = true;
+      const collectButtons = document.querySelectorAll('.collectButton');
+      for (let i = 0; i < collectButtons.length; i++) {
+        collectButtons[i].classList.add("canPressCollect");
+      }
+    }, 5000);
+  };
   const handleOpen = () => {
     setActiveItem(
-      createItemComponent(itemID.image, itemID.name, itemID.artifacts)
+      createItemComponent(itemID?.image, itemID?.name, itemID?.artifacts)
     );
     setActivePage("itemMenu");
   };
-  const sellValue = Math.floor(itemID.price * 0.6);
+  const calcSellValue = () => {
+    if (itemID?.price) {
+      return Math.floor(itemID?.price * 0.6);
+    } else if (itemID?.value) {
+      return itemID?.value;
+    }
+  };
   return (
-    <div className="artifact">
+    <div className={`artifact ${itemID?.price ? "normal" : itemID?.rarity}`}>
       <img src={sampleImg} alt={sampleName} />
-      <h2>{sampleName}</h2>
+      <h2>
+        {itemID?.rarity === "Mythical" || itemID?.rarity === "Godly"
+          ? itemID?.hiddenName
+          : sampleName}
+      </h2>
       <div className="buttonCont">
         <button onClick={handleSell} className="sell">
           <h3>
-            <i className="fa-solid fa-coins"></i> {sellValue}
+            <i className="fa-solid fa-coins"></i> {`${calcSellValue()}`}
           </h3>
         </button>
-        <button onClick={handleOpen} className="open">
-          <h3>Open</h3>
-        </button>
+        {itemID?.price && (
+          <button onClick={handleOpen} className="open">
+            <h3>Open</h3>
+          </button>
+        )}
       </div>
     </div>
   );
