@@ -12,7 +12,7 @@ function App() {
   const [totalValue, setTotalValue] = useState(0);
   const [valueProgress, setValueProgress] = useState(100);
   const [levelValue, setLevelValue] = useState(100);
-  const [balance, setBalance] = useState(10000000000);
+  const [balance, setBalance] = useState(0);
   const [levelID, setLevelID] = useState(2);
   const [moreValueNeeded, setMoreValueNeeded] = useState(100);
   const [ownedArtifacts, setOwnedArtifacts] = useState([]);

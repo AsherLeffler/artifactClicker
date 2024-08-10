@@ -328,6 +328,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+.openDropCont img{
+  transform-origin: center;
 }
 @keyframes shake {
   0% {
@@ -411,28 +415,39 @@
   bottom: 3%;
 }
 .shake {
-  animation: shake 4s ease-in-out;
+  animation: shake 2.5s ease-in-out;
 }
 .openImg1 {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
   width: 35%;
   aspect-ratio: 1 / 1;
+  position: relative;
 }
 .openImg2 {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
   width: 26%;
   aspect-ratio: 1 / 1;
+  position: relative;
 }
 .openImg3 {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
   width: 24%;
   aspect-ratio: 1 / 1;
+  position: relative;
 }
 .openImg4 {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
   width: 18%;
   min-width: 180px;
   aspect-ratio: 1 / 1;
+  position: relative;
 }
 .openImg5 {
-  width: 20%;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  width: 18%;
   aspect-ratio: 1 / 1;
+  position: relative;
+  z-index: 10;
 }
 .collectButton {
   width: 15%;
@@ -444,7 +459,6 @@
   font-family: "Antic", sans-serif;
   border-radius: 8px;
   border: none;
-  cursor: pointer;
   transition: background-color 1s;
 }
 .TerribleGlow {
@@ -491,10 +505,26 @@
 }
 .canPressCollect{
   background-color: rgb(52, 133, 255);
+  cursor: pointer;
 }
 .canPressCollect:hover{
   background-color: rgb(16, 80, 177);
 }
 .openBottom{
   margin-bottom: 100px;
+}
+.identifyer{
+  opacity: 1;
+  visibility: visible;
+}
+.invisible{
+  opacity: 0;
+  visibility: hidden;
+}
+.hiddenImg5{
+  width: 15%;
+  aspect-ratio: 1;
+  position: absolute;
+  z-index: 1;
+  visibility: hidden;
 }

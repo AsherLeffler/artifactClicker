@@ -270,7 +270,7 @@ const OwnedSample = ({
   const openScene = (amountToOpen) => {
     const handleCollect = () => {
       const image = document.querySelector(".indentifyer");
-      if(done){
+      if (done) {
         setPage("inventoryMenu");
       }
     };
@@ -281,6 +281,12 @@ const OwnedSample = ({
             <div className="openDropCont">
               <img
                 className={`openImg1 indentifyer ${isShaking ? "shake" : ""}`}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+              <img
+                className={`hiddenImg5 itemIdentifyer`}
+                style={{ left: "50%", transform: "translateX(-50%)" }}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
@@ -299,13 +305,25 @@ const OwnedSample = ({
             <div className="openDropCont">
               <img
                 className={`openImg2 indentifyer ${isShaking ? "shake" : ""}`}
-                style={{ marginRight: "40px" }}
+                style={{ left: "28%" }}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
               <img
                 className={`openImg2 indentifyer ${isShaking ? "shake" : ""}`}
-                style={{ marginLeft: "40px" }}
+                style={{ right: "28%" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+              <img
+                className={`hiddenImg5 itemIdentifyer`}
+                style={{ left: "32%", transform: "translateX(-32%)" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+              <img
+                className={`hiddenImg5 itemIdentifyer`}
+                style={{ right: "32%", transform: "translateX(32%)" }}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
@@ -327,17 +345,35 @@ const OwnedSample = ({
                 src={itemID?.image}
                 alt={itemID?.name}
               />
+              <img
+                className={`hiddenImg5 itemIdentifyer`}
+                style={{ left: "50%", transform: "translateX(-50%)" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
             </div>
             <div className="openDropCont openBottom">
               <img
+                style={{ left: "27%" }}
                 className={`openImg3 indentifyer ${isShaking ? "shake" : ""}`}
-                style={{ marginRight: "40px" }}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
               <img
+                style={{ right: "27%" }}
                 className={`openImg3 indentifyer ${isShaking ? "shake" : ""}`}
-                style={{ marginLeft: "40px" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+              <img
+                className={`hiddenImg5 itemIdentifyer`}
+                style={{ left: "32%", transform: "translateX(-32%)" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+              <img
+                className={`hiddenImg5 itemIdentifyer`}
+                style={{ right: "32%", transform: "translateX(32%)" }}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
@@ -359,6 +395,12 @@ const OwnedSample = ({
                 src={itemID?.image}
                 alt={itemID?.name}
               />
+              <img
+                className={`hiddenImg5 itemIdentifyer`}
+                style={{ left: "50%", transform: "translateX(-50%)" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
             </div>
             <div className="openDropCont">
               <img
@@ -373,10 +415,28 @@ const OwnedSample = ({
                 alt={itemID?.name}
                 style={{ marginLeft: "90px" }}
               />
+              <img
+                className={`hiddenImg5 itemIdentifyer`}
+                style={{ left: "25%", transform: "translateX(-25%)" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+              <img
+                className={`hiddenImg5 itemIdentifyer`}
+                style={{ right: "25%", transform: "translateX(25%)" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
             </div>
             <div className="openDropCont openBottom">
               <img
                 className={`openImg4 indentifyer ${isShaking ? "shake" : ""}`}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+              <img
+                className={`hiddenImg5 itemIdentifyer`}
+                style={{ left: "50%", transform: "translateX(-50%)" }}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
@@ -398,31 +458,64 @@ const OwnedSample = ({
                 src={itemID?.image}
                 alt={itemID?.name}
               />
+              <img
+                className={`hiddenImg5 itemIdentifyer`}
+                style={{ left: "50%", transform: "translateX(-50%)" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
             </div>
             <div className="openDropCont">
               <img
                 className={`openImg5 indentifyer ${isShaking ? "shake" : ""}`}
-                style={{ marginRight: "90px" }}
+                style={{ left: "30%" }}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
               <img
                 className={`openImg5 indentifyer ${isShaking ? "shake" : ""}`}
-                style={{ marginLeft: "90px" }}
+                style={{ right: "30%" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+              <img
+                className={`hiddenImg5 itemIdentifyer`}
+                style={{ left: "25%", transform: "translateX(-25%)" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+              <img
+                className={`hiddenImg5 itemIdentifyer`}
+                style={{ right: "25%", transform: "translateX(25%)" }}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
             </div>
-            <div className="openDropCont openBottom" style={{ marginTop: "20px" }}>
+            <div
+              className="openDropCont openBottom"
+              style={{ marginTop: "20px" }}
+            >
               <img
                 className={`openImg5 indentifyer ${isShaking ? "shake" : ""}`}
-                style={{ marginRight: "20px" }}
+                style={{ left: "20%" }}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
               <img
                 className={`openImg5 indentifyer ${isShaking ? "shake" : ""}`}
-                style={{ marginLeft: "20px" }}
+                style={{ right: "20%" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+              <img
+                className={`hiddenImg5 itemIdentifyer`}
+                style={{ left: "37%", transform: "translateX(-37%)" }}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+              <img
+                className={`hiddenImg5 itemIdentifyer`}
+                style={{ right: "37%", transform: "translateX(37%)" }}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
@@ -443,119 +536,144 @@ const OwnedSample = ({
     let valueToAdd = 0;
     const switchRandom = document.querySelectorAll(".indentifyer");
     for (let i = 0; i < amountToOpen; i++) {
-      const randomNumber = Math.round(Math.random() * (20 - 1) + 1);
-      let newArtifact = itemID?.artifacts[randomNumber];
-      setOwnedArtifacts((prevOwnedArtifacts) => [
-        ...prevOwnedArtifacts,
-        { newArtifact },
-      ]);
-      if (!newArtifact) {
-        console.log('Caught Error');
-        newArtifact = itemID?.artifacts[Math.round(Math.random() * (20 - 1) + 1)];
-        valueToAdd += newArtifact?.value;
-        switchRandom[i].setAttribute("src", newArtifact?.img);
-        switchRandom[i].setAttribute("alt", "Not Rendering");
-        switchRandom[i].style.width = "15%";
-        switchRandom[i].classList.add(`${newArtifact?.rarity}Glow`);
-        if (
-          newArtifact?.rarity === "Mythical" ||
-          newArtifact?.rarity === "Godly"
-        ) {
-          switch (itemID?.name) {
-            case "Clay Sample":
-              setClayIsFound(true);
-              break;
-            case "Stone Sample":
-              setStoneIsFound(true);
-              break;
-            case "Ocean Rock Sample":
-              setOceanIsFound(true);
-              break;
-            case "Quartz Sample":
-              setQuartzIsFound(true);
-              break;
-            case "Crystal Sample":
-              setCrystalIsFound(true);
-              break;
-            case "Obsidian Sample":
-              setObsidianIsFound(true);
-              break;
-            case "Moon Rock Sample":
-              setMoonIsFound(true);
-              break;
-            case "Meteor Sample":
-              setMeteorIsFound(true);
-              break;
-            case "Alien Rock Sample":
-              setAlienIsFound(true);
-              break;
-            case "Star Core Sample":
-              setStarIsFound(true);
-              break;
-            case "Black Hole Sample":
-              setBlackIsFound(true);
-              break;
-            case "Cosmic Energy Sample":
-              setCosmicIsFound(true);
-              break;
-          }
-        }
-      } else {
-        valueToAdd += newArtifact?.value;
-        switchRandom[i].setAttribute("src", newArtifact?.img);
-        switchRandom[i].setAttribute("alt", "Not Rendering");
-        switchRandom[i].style.width = "15%";
-        switchRandom[i].classList.add(`${newArtifact?.rarity}Glow`);
-        if (
-          newArtifact?.rarity === "Mythical" ||
-          newArtifact?.rarity === "Godly"
-        ) {
-          switch (itemID?.name) {
-            case "Clay Sample":
-              setClayIsFound(true);
-              break;
-            case "Stone Sample":
-              setStoneIsFound(true);
-              break;
-            case "Ocean Rock Sample":
-              setOceanIsFound(true);
-              break;
-            case "Quartz Sample":
-              setQuartzIsFound(true);
-              break;
-            case "Crystal Sample":
-              setCrystalIsFound(true);
-              break;
-            case "Obsidian Sample":
-              setObsidianIsFound(true);
-              break;
-            case "Moon Rock Sample":
-              setMoonIsFound(true);
-              break;
-            case "Meteor Sample":
-              setMeteorIsFound(true);
-              break;
-            case "Alien Rock Sample":
-              setAlienIsFound(true);
-              break;
-            case "Star Core Sample":
-              setStarIsFound(true);
-              break;
-            case "Black Hole Sample":
-              setBlackIsFound(true);
-              break;
-            case "Cosmic Energy Sample":
-              setCosmicIsFound(true);
-              break;
-          }
-        }
-      }
+      setTimeout(
+        ((i) => {
+          return () => {
+            const randomNumber = Math.round(Math.random() * 19);
+            const newArtifact = itemID?.artifacts[randomNumber];
+            if (!newArtifact) {
+              console.log("Caught Error");
+              const hiddenItem = document.querySelector(".itemIdentifyer");
+              const errorNewArtifact =
+                itemID?.artifacts[Math.round(Math.random() * 19)];
+              valueToAdd += errorNewArtifact?.value;
+              switchRandom[i].classList.add("invisible");
+              hiddenItem.setAttribute("src", errorNewArtifact?.img);
+              hiddenItem.setAttribute("alt", "Not Rendering");
+              hiddenItem.style.visibility = "visible";
+              hiddenItem.classList.replace(
+                "itemIdentifyer",
+                `${errorNewArtifact?.rarity}Glow`
+              );
+              setOwnedArtifacts((prevOwnedArtifacts) => [
+                ...prevOwnedArtifacts,
+                { errorNewArtifact },
+              ]);
+              if (
+                errorNewArtifact?.rarity === "Mythical" ||
+                errorNewArtifact?.rarity === "Godly"
+              ) {
+                switch (itemID?.name) {
+                  case "Clay Sample":
+                    setClayIsFound(true);
+                    break;
+                  case "Stone Sample":
+                    setStoneIsFound(true);
+                    break;
+                  case "Ocean Rock Sample":
+                    setOceanIsFound(true);
+                    break;
+                  case "Quartz Sample":
+                    setQuartzIsFound(true);
+                    break;
+                  case "Crystal Sample":
+                    setCrystalIsFound(true);
+                    break;
+                  case "Obsidian Sample":
+                    setObsidianIsFound(true);
+                    break;
+                  case "Moon Rock Sample":
+                    setMoonIsFound(true);
+                    break;
+                  case "Meteor Sample":
+                    setMeteorIsFound(true);
+                    break;
+                  case "Alien Rock Sample":
+                    setAlienIsFound(true);
+                    break;
+                  case "Star Core Sample":
+                    setStarIsFound(true);
+                    break;
+                  case "Black Hole Sample":
+                    setBlackIsFound(true);
+                    break;
+                  case "Cosmic Energy Sample":
+                    setCosmicIsFound(true);
+                    break;
+                }
+              }
+            } else {
+              const hiddenItem = document.querySelector(".itemIdentifyer");
+              valueToAdd += newArtifact.value;
+              setOwnedArtifacts((prevOwnedArtifacts) => [
+                ...prevOwnedArtifacts,
+                { newArtifact },
+              ]);
+              switchRandom[i].classList.add("invisible");
+              hiddenItem.setAttribute("src", newArtifact?.img);
+              hiddenItem.setAttribute("alt", "Not Rendering");
+              hiddenItem.style.visibility = "visible";
+              hiddenItem.classList.replace(
+                "itemIdentifyer",
+                `${newArtifact?.rarity}Glow`
+              );
+              if (
+                newArtifact?.rarity === "Mythical" ||
+                newArtifact?.rarity === "Godly"
+              ) {
+                switch (itemID?.name) {
+                  case "Clay Sample":
+                    setClayIsFound(true);
+                    break;
+                  case "Stone Sample":
+                    setStoneIsFound(true);
+                    break;
+                  case "Ocean Rock Sample":
+                    setOceanIsFound(true);
+                    break;
+                  case "Quartz Sample":
+                    setQuartzIsFound(true);
+                    break;
+                  case "Crystal Sample":
+                    setCrystalIsFound(true);
+                    break;
+                  case "Obsidian Sample":
+                    setObsidianIsFound(true);
+                    break;
+                  case "Moon Rock Sample":
+                    setMoonIsFound(true);
+                    break;
+                  case "Meteor Sample":
+                    setMeteorIsFound(true);
+                    break;
+                  case "Alien Rock Sample":
+                    setAlienIsFound(true);
+                    break;
+                  case "Star Core Sample":
+                    setStarIsFound(true);
+                    break;
+                  case "Black Hole Sample":
+                    setBlackIsFound(true);
+                    break;
+                  case "Cosmic Energy Sample":
+                    setCosmicIsFound(true);
+                    break;
+                }
+              }
+              const newTotalValue = valueAfterDropReduced + valueToAdd;
+              const newValueProgress =
+                ((levelValue - newTotalValue) / levelValue) * 100;
+              setTotalValue(newTotalValue);
+              setValueProgress(newValueProgress);
+              document.getElementById(
+                "progressBar"
+              ).style.width = `${newValueProgress}%`;
+            }
+          };
+        })(i),
+        i * 100
+      );
     }
-    const newTotalValue = valueAfterDropReduced + valueToAdd;
-    const newValueProgress = ((levelValue - newTotalValue) / levelValue) * 100;
-    setTotalValue(newTotalValue);
-    setValueProgress(newValueProgress);
-    document.getElementById("progressBar").style.width = `${newValueProgress}%`;
   };
   const handleOpenSample = (amountToOpen) => {
     setOpenActiveItem(openScene(amountToOpen));
@@ -578,12 +696,14 @@ const OwnedSample = ({
     setTimeout(() => {
       setIsShaking(false);
       generateNewArtifact(amountToOpen, newTotalValue);
-      done = true;
-      const collectButtons = document.querySelectorAll('.collectButton');
+      const collectButtons = document.querySelectorAll(".collectButton");
       for (let i = 0; i < collectButtons.length; i++) {
         collectButtons[i].classList.add("canPressCollect");
       }
-    }, 5000);
+      setTimeout(() => {
+        done = true;
+      }, 500);
+    }, 3000);
   };
   const handleOpen = () => {
     setActiveItem(
