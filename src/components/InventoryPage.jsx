@@ -21,6 +21,8 @@ const InventoryPage = ({
   setStarIsFound,
   setBlackIsFound,
   setCosmicIsFound,
+  certifiedMax,
+  luck,
 }) => {
   const [activePage, setActivePage] = useState("inventoryMenu");
   const [activeItem, setActiveItem] = useState(null);
@@ -100,6 +102,8 @@ const InventoryPage = ({
               setStarIsFound={setStarIsFound}
               setBlackIsFound={setBlackIsFound}
               setCosmicIsFound={setCosmicIsFound}
+              certifiedMax={certifiedMax}
+              luck={luck}
             />
           ))}
         </div>
@@ -150,6 +154,8 @@ const OwnedSample = ({
   setStarIsFound,
   setBlackIsFound,
   setCosmicIsFound,
+  certifiedMax,
+  luck,
 }) => {
   const [isShaking, setIsShaking] = useState(false);
   const [canCollect, setCanCollect] = useState(false);
@@ -532,6 +538,166 @@ const OwnedSample = ({
       </div>
     );
   };
+  function findRarity() {
+    const randomNumber = Math.round(Math.random() * 19);
+    const hasTerrible =
+      itemID?.artifacts[0].rarity === "Terrible" ? true : false;
+    const hasGodly = itemID?.artifacts[19].rarity === "Godly" ? true : false;
+    if (luck === 0) {
+      if (randomNumber <= 7) {
+        if (hasTerrible &&  randomNumber === 0) {
+          return "Terrible";
+        } else {
+          return "Common";
+        }
+      }
+      if (7 < randomNumber && randomNumber <= 13) {
+        return "Uncommon";
+      }
+      if (13 < randomNumber && randomNumber <= 16) {
+        return "Rare";
+      }
+      if (16 < randomNumber && randomNumber <= 18) {
+        return "Unique";
+      }
+      if (18 < randomNumber) {
+        if (hasGodly && randomNumber === 19) {
+          return "Godly";
+        } else {
+          return "Mythic";
+        }
+      }
+    }
+    if (luck === 1) {
+      if (randomNumber <= 5) {
+        if (hasTerrible && randomNumber === 0) {
+          return "Terrible";
+        } else {
+          return "Common";
+        }
+      }
+      if (5 < randomNumber && randomNumber <= 12) {
+        return "Uncommon";
+      }
+      if (12 < randomNumber && randomNumber <= 16) {
+        return "Rare";
+      }
+      if (16 < randomNumber && randomNumber <= 18) {
+        return "Unique";
+      }
+      if (18 < randomNumber) {
+        if (hasGodly && randomNumber === 18) {
+          return "Godly";
+        } else {
+          return "Mythic";
+        }
+      }
+    }
+    if (luck === 2) {
+      if (randomNumber <= 4) {
+        if (hasTerrible &&  randomNumber === 0) {
+          return "Terrible";
+        } else {
+          return "Common";
+        }
+      }
+      if (4 < randomNumber && randomNumber <= 10) {
+        return "Uncommon";
+      }
+      if (10 < randomNumber && randomNumber <= 15) {
+        return "Rare";
+      }
+      if (15 < randomNumber && randomNumber <= 18) {
+        return "Unique";
+      }
+      if (18 < randomNumber) {
+        if (hasGodly && randomNumber === 19) {
+          return "Godly";
+        } else {
+          return "Mythic";
+        }
+      }
+    }
+    if (luck === 3) {
+      if (randomNumber <= 4) {
+        if (hasTerrible &&  randomNumber === 0) {
+          return "Terrible";
+        } else {
+          return "Common";
+        }
+      }
+      if (4 < randomNumber && randomNumber <= 9) {
+        return "Uncommon";
+      }
+      if (9 < randomNumber && randomNumber <= 14) {
+        return "Rare";
+      }
+      if (14 < randomNumber && randomNumber <= 17) {
+        return "Unique";
+      }
+      if (17 < randomNumber) {
+        if (hasGodly && randomNumber === 19) {
+          return "Godly";
+        } else {
+          return "Mythic";
+        }
+      }
+    }
+    if (luck === 4) {
+      if (randomNumber <= 3) {
+        if (hasTerrible &&  randomNumber === 0) {
+          return "Terrible";
+        } else {
+          return "Common";
+        }
+      }
+      if (3 < randomNumber && randomNumber <= 6) {
+        return "Uncommon";
+      }
+      if (6 < randomNumber && randomNumber <= 11) {
+        return "Rare";
+      }
+      if (11 < randomNumber && randomNumber <= 15) {
+        return "Unique";
+      }
+      if (15 < randomNumber) {
+        if (hasGodly && randomNumber === 19) {
+          return "Godly";
+        } else {
+          return "Mythic";
+        }
+      }
+    }
+  }
+  function findRarityArtifact(rarity) {
+    switch (rarity) {
+      case "Terrible":
+        return itemID?.artifacts[0];
+        break;
+      case "Common":
+        const commonRandomNum = Math.round(Math.random() * 7)
+        return itemID?.artifacts[commonRandomNum];
+        break;
+      case "Uncommon":
+        const uncommonRandomNum = Math.round(Math.random() * (13 - 8) + 8)
+        return itemID?.artifacts[uncommonRandomNum];
+        break;
+      case "Rare":
+        const rareRandomNum = Math.round(Math.random() * (16 - 14) + 14)
+        return itemID?.artifacts[rareRandomNum];
+        break;
+      case "Unique":
+        const uniqueRandomNum = Math.round(Math.random() * (18 - 17) + 17)
+        return itemID?.artifacts[uniqueRandomNum];
+        break;
+      case "Mythic":
+        return itemID?.artifacts[19];
+        break;
+      case "Godly":
+        return itemID?.artifacts[19];
+        break;
+    }
+  }
   const generateNewArtifact = (amountToOpen, valueAfterDropReduced) => {
     let valueToAdd = 0;
     const switchRandom = document.querySelectorAll(".indentifyer");
@@ -539,135 +705,90 @@ const OwnedSample = ({
       setTimeout(
         ((i) => {
           return () => {
-            const randomNumber = Math.round(Math.random() * 19);
-            const newArtifact = itemID?.artifacts[randomNumber];
-            if (!newArtifact) {
-              console.log("Caught Error");
-              const hiddenItem = document.querySelector(".itemIdentifyer");
-              const errorNewArtifact =
-                itemID?.artifacts[Math.round(Math.random() * 19)];
-              valueToAdd += errorNewArtifact?.value;
-              switchRandom[i].classList.add("invisible");
-              hiddenItem.setAttribute("src", errorNewArtifact?.img);
-              hiddenItem.setAttribute("alt", "Not Rendering");
-              hiddenItem.style.visibility = "visible";
-              hiddenItem.classList.replace(
-                "itemIdentifyer",
-                `${errorNewArtifact?.rarity}Glow`
-              );
-              setOwnedArtifacts((prevOwnedArtifacts) => [
-                ...prevOwnedArtifacts,
-                { errorNewArtifact },
-              ]);
-              if (
-                errorNewArtifact?.rarity === "Mythical" ||
-                errorNewArtifact?.rarity === "Godly"
-              ) {
-                switch (itemID?.name) {
-                  case "Clay Sample":
-                    setClayIsFound(true);
-                    break;
-                  case "Stone Sample":
-                    setStoneIsFound(true);
-                    break;
-                  case "Ocean Rock Sample":
-                    setOceanIsFound(true);
-                    break;
-                  case "Quartz Sample":
-                    setQuartzIsFound(true);
-                    break;
-                  case "Crystal Sample":
-                    setCrystalIsFound(true);
-                    break;
-                  case "Obsidian Sample":
-                    setObsidianIsFound(true);
-                    break;
-                  case "Moon Rock Sample":
-                    setMoonIsFound(true);
-                    break;
-                  case "Meteor Sample":
-                    setMeteorIsFound(true);
-                    break;
-                  case "Alien Rock Sample":
-                    setAlienIsFound(true);
-                    break;
-                  case "Star Core Sample":
-                    setStarIsFound(true);
-                    break;
-                  case "Black Hole Sample":
-                    setBlackIsFound(true);
-                    break;
-                  case "Cosmic Energy Sample":
-                    setCosmicIsFound(true);
-                    break;
-                }
+            const rarity = findRarity();
+            const isCertified = Math.round(
+              Math.random() * (certifiedMax - 1) + 1
+            );
+            const newArtifact = findRarityArtifact(rarity);
+            const hiddenItem = document.querySelector(".itemIdentifyer");
+            if (isCertified === 1) {
+              newArtifact.value = newArtifact.value * 2;
+              newArtifact.isCertified = true;
+              hiddenItem.classList.add("certified");
+            }
+            valueToAdd += newArtifact.value;
+            setOwnedArtifacts((prevOwnedArtifacts) => [
+              ...prevOwnedArtifacts,
+              { newArtifact },
+            ]);
+            switchRandom[i].classList.add("invisible");
+            hiddenItem.setAttribute("src", newArtifact?.img);
+            hiddenItem.setAttribute("alt", "Not Rendering");
+            hiddenItem.style.visibility = "visible";
+            hiddenItem.classList.replace(
+              "itemIdentifyer",
+              `${newArtifact?.rarity}Glow`
+            );
+            if (
+              newArtifact?.rarity === "Mythical" ||
+              newArtifact?.rarity === "Godly"
+            ) {
+              switch (itemID?.name) {
+                case "Clay Sample":
+                  setClayIsFound(true);
+                  break;
+                case "Stone Sample":
+                  setStoneIsFound(true);
+                  break;
+                case "Ocean Rock Sample":
+                  setOceanIsFound(true);
+                  break;
+                case "Quartz Sample":
+                  setQuartzIsFound(true);
+                  break;
+                case "Crystal Sample":
+                  setCrystalIsFound(true);
+                  break;
+                case "Obsidian Sample":
+                  setObsidianIsFound(true);
+                  break;
+                case "Moon Rock Sample":
+                  setMoonIsFound(true);
+                  break;
+                case "Meteor Sample":
+                  setMeteorIsFound(true);
+                  break;
+                case "Alien Rock Sample":
+                  setAlienIsFound(true);
+                  break;
+                case "Star Core Sample":
+                  setStarIsFound(true);
+                  break;
+                case "Black Hole Sample":
+                  setBlackIsFound(true);
+                  break;
+                case "Cosmic Energy Sample":
+                  setCosmicIsFound(true);
+                  break;
               }
-            } else {
-              const hiddenItem = document.querySelector(".itemIdentifyer");
-              valueToAdd += newArtifact.value;
-              setOwnedArtifacts((prevOwnedArtifacts) => [
-                ...prevOwnedArtifacts,
-                { newArtifact },
-              ]);
-              switchRandom[i].classList.add("invisible");
-              hiddenItem.setAttribute("src", newArtifact?.img);
-              hiddenItem.setAttribute("alt", "Not Rendering");
-              hiddenItem.style.visibility = "visible";
-              hiddenItem.classList.replace(
-                "itemIdentifyer",
-                `${newArtifact?.rarity}Glow`
-              );
-              if (
-                newArtifact?.rarity === "Mythical" ||
-                newArtifact?.rarity === "Godly"
-              ) {
-                switch (itemID?.name) {
-                  case "Clay Sample":
-                    setClayIsFound(true);
-                    break;
-                  case "Stone Sample":
-                    setStoneIsFound(true);
-                    break;
-                  case "Ocean Rock Sample":
-                    setOceanIsFound(true);
-                    break;
-                  case "Quartz Sample":
-                    setQuartzIsFound(true);
-                    break;
-                  case "Crystal Sample":
-                    setCrystalIsFound(true);
-                    break;
-                  case "Obsidian Sample":
-                    setObsidianIsFound(true);
-                    break;
-                  case "Moon Rock Sample":
-                    setMoonIsFound(true);
-                    break;
-                  case "Meteor Sample":
-                    setMeteorIsFound(true);
-                    break;
-                  case "Alien Rock Sample":
-                    setAlienIsFound(true);
-                    break;
-                  case "Star Core Sample":
-                    setStarIsFound(true);
-                    break;
-                  case "Black Hole Sample":
-                    setBlackIsFound(true);
-                    break;
-                  case "Cosmic Energy Sample":
-                    setCosmicIsFound(true);
-                    break;
-                }
+            }
+            const newTotalValue = Math.round(
+              valueAfterDropReduced + valueToAdd
+            );
+            const newValueProgress =
+              ((levelValue - newTotalValue) / levelValue) * 100;
+            setTotalValue(newTotalValue);
+            setValueProgress(newValueProgress);
+            document.getElementById(
+              "progressBar"
+            ).style.width = `${newValueProgress}%`;
+            if (i === amountToOpen - 1) {
+              done = true;
+              const collectButtons =
+                document.querySelectorAll(".collectButton");
+              for (let i = 0; i < collectButtons.length; i++) {
+                collectButtons[i].classList.add("canPressCollect");
               }
-              const newTotalValue = valueAfterDropReduced + valueToAdd;
-              const newValueProgress =
-                ((levelValue - newTotalValue) / levelValue) * 100;
-              setTotalValue(newTotalValue);
-              setValueProgress(newValueProgress);
-              document.getElementById(
-                "progressBar"
-              ).style.width = `${newValueProgress}%`;
             }
           };
         })(i),
@@ -696,13 +817,6 @@ const OwnedSample = ({
     setTimeout(() => {
       setIsShaking(false);
       generateNewArtifact(amountToOpen, newTotalValue);
-      const collectButtons = document.querySelectorAll(".collectButton");
-      for (let i = 0; i < collectButtons.length; i++) {
-        collectButtons[i].classList.add("canPressCollect");
-      }
-      setTimeout(() => {
-        done = true;
-      }, 500);
     }, 3000);
   };
   const handleOpen = () => {
@@ -723,8 +837,13 @@ const OwnedSample = ({
       <img src={sampleImg} alt={sampleName} />
       <h2>
         {itemID?.rarity === "Mythical" || itemID?.rarity === "Godly"
-          ? itemID?.hiddenName
-          : sampleName}
+          ? `${itemID?.hiddenName} `
+          : `${sampleName} `}
+        {itemID?.isCertified ? (
+          <i className="fa-solid fa-star" style={{ color: "yellow" }}></i>
+        ) : (
+          ""
+        )}
       </h2>
       <div className="buttonCont">
         <button onClick={handleSell} className="sell">

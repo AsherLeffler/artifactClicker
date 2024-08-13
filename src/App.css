@@ -1,5 +1,5 @@
-:root{
-  overflow-x: hidden;
+:root {
+  overflow: hidden;
 }
 #mainBody {
   width: 100vw;
@@ -264,27 +264,27 @@
 .Uncommon {
   background: linear-gradient(
     90deg,
-    rgb(60, 156, 45),
-    rgb(14, 105, 0),
-    rgb(60, 156, 45)
+    rgb(13, 99, 0),
+    rgb(8, 60, 0),
+    rgb(13, 99, 0)
   );
   color: white;
 }
 .Rare {
   background: linear-gradient(
     90deg,
-    rgb(12, 62, 213),
-    rgb(0, 16, 160),
-    rgb(12, 62, 213)
+    rgb(8, 44, 150),
+    rgb(0, 10, 103),
+    rgb(8, 44, 150)
   );
   color: white;
 }
 .Unique {
   background: linear-gradient(
     90deg,
-    rgb(130, 0, 197),
-    rgb(77, 0, 132),
-    rgb(130, 0, 197)
+    rgb(94, 0, 141),
+    rgb(48, 0, 82),
+    rgb(94, 0, 141)
   );
   color: white;
 }
@@ -330,7 +330,7 @@
   align-items: center;
   position: relative;
 }
-.openDropCont img{
+.openDropCont img {
   transform-origin: center;
 }
 @keyframes shake {
@@ -410,7 +410,7 @@
     transform: rotateZ(0deg);
   }
 }
-.appear{
+.appear {
   position: absolute;
   bottom: 3%;
 }
@@ -462,8 +462,8 @@
   transition: background-color 1s;
 }
 .TerribleGlow {
-  box-shadow: 0 0 6px 6px rgb(123, 45, 0);
-  background-color: rgba(123, 45, 0, 0.2);
+  box-shadow: 0 0 6px 6px rgb(135, 81, 50);
+  background-color: rgba(135, 81, 50, 0.2);
   border-radius: 50%;
   padding: 10px;
 }
@@ -503,28 +503,173 @@
   border-radius: 50%;
   padding: 10px;
 }
-.canPressCollect{
+.canPressCollect {
   background-color: rgb(52, 133, 255);
   cursor: pointer;
 }
-.canPressCollect:hover{
+.canPressCollect:hover {
   background-color: rgb(16, 80, 177);
 }
-.openBottom{
+.openBottom {
   margin-bottom: 100px;
 }
-.identifyer{
+.identifyer {
   opacity: 1;
   visibility: visible;
 }
-.invisible{
+.invisible {
   opacity: 0;
   visibility: hidden;
 }
-.hiddenImg5{
+.hiddenImg5 {
   width: 15%;
   aspect-ratio: 1;
   position: absolute;
   z-index: 1;
   visibility: hidden;
+}
+.red {
+  background-color: rgb(255, 71, 71);
+}
+.blue:hover {
+  background-color: rgb(42, 107, 157);
+  box-shadow: 0 0 12px 2px rgba(255, 255, 255, 0.15);
+}
+.blue {
+  background-color: rgb(57, 57, 57);
+}
+.enhanceCont {
+  background: linear-gradient(
+      75deg,
+      rgb(73, 53, 53),
+      rgb(161, 116, 116),
+      rgb(73, 53, 53)
+    ),
+    linear-gradient(
+      105deg,
+      rgb(73, 53, 53),
+      rgb(161, 116, 116),
+      rgb(73, 53, 53)
+      );
+  background-blend-mode: overlay;
+  width: 40%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow: 0 0 12px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  justify-content: space-evenly;
+}
+.bolt {
+  color: rgb(255, 181, 181);
+  font-size: 11rem;
+  margin: 0;
+  transition: 0.15s;
+  cursor: pointer;
+}
+.bolt:hover{
+  font-size: 11.8rem;
+}
+.selectItem {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-content: flex-start;
+  position: absolute;
+  justify-content: start;
+  background: linear-gradient(
+    90deg,
+    rgb(145, 105, 105),
+    rgb(194, 140, 140),
+    rgb(145, 105, 105)
+  );
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  overflow-x: hidden;
+}
+.expandDiv {
+  width: calc(70vw - 70px);
+  min-width: fit-content;
+  height: calc(90vh - 20px);
+  padding: 10px 0;
+  padding-left: 60px;
+  padding-right: 10px;
+}
+.despandDiv {
+  width: 0;
+  min-width: 0;
+  height: 0;
+  padding: 0;
+}
+.selectItem::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+.selectItem::-webkit-scrollbar-track {
+  background: #2c2c2c;
+  border-radius: 10px;
+}
+.selectItem::-webkit-scrollbar-thumb {
+  background-color: #666;
+  border-radius: 10px;
+  border: 3px solid #2c2c2c;
+}
+.selectItem::-webkit-scrollbar-thumb:hover {
+  background-color: #888;
+}
+.selectItem::-webkit-scrollbar-corner {
+  background: #2c2c2c;
+}
+.exitBtn {
+  width: fit-content;
+  aspect-ratio: 1;
+  background-color: transparent;
+  color: rgb(206, 206, 206);
+  font-size: 2rem;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.15s ease;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+.exitBtn:hover {
+  color: rgb(166, 166, 166);
+}
+.itemCont {
+  width: calc(25% - 35px);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 8px;
+  font-family: "Antic", sans-serif;
+  color: white;
+  text-align: center;
+  font-size: 0.7rem;
+  padding: 10px;
+  position: relative;
+}
+.itemCont * {
+  margin: 0;
+}
+.itemCont img {
+  width: 70%;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+}
+.enhancingItemImage{
+  width: 20%;
+  aspect-ratio: 1;
+}
+.enhanceScene{
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  position: relative;
+  overflow: hidden;
 }

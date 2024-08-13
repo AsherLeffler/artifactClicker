@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-const ExtractPage = ({ balance, setBalance }) => {
-  const max = 0.3;
-  const min = 0.05;
+const ExtractPage = ({ balance, setBalance, max, min }) => {
   const [randomMoney, setRandomMoney] = useState(0);
 
   function handleGemClick() {

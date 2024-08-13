@@ -4,7 +4,7 @@ import ExtractPage from "./components/ExtractPage";
 import InventoryPage from "./components/InventoryPage";
 import ShopPage from "./components/ShopPage";
 import UpgradesPage from "./components/UpgradesPage";
-import BettingPage from "./components/BettingPage";
+import EnhancePage from "./components/EnhancePage";
 
 function App() {
   const [activeButton, setActiveButton] = useState("extractBtn");
@@ -12,7 +12,7 @@ function App() {
   const [totalValue, setTotalValue] = useState(0);
   const [valueProgress, setValueProgress] = useState(100);
   const [levelValue, setLevelValue] = useState(100);
-  const [balance, setBalance] = useState(0);
+  const [balance, setBalance] = useState(1000000);
   const [levelID, setLevelID] = useState(2);
   const [moreValueNeeded, setMoreValueNeeded] = useState(100);
   const [ownedArtifacts, setOwnedArtifacts] = useState([]);
@@ -28,6 +28,16 @@ function App() {
   const [starIsFound, setStarIsFound] = useState(false);
   const [blackIsFound, setBlackIsFound] = useState(false);
   const [cosmicIsFound, setCosmicIsFound] = useState(false);
+  const [certifiedMax, setCertifiedMax] = useState(8);
+  const [luck, setLuck] = useState(0);
+  const [currentCertifiedPrice, setCurrentCertifiedPrice] = useState(200);
+  const [currentLuckPrice, setCurrentLuckPrice] = useState(500);
+  const [currentCoinsPrice, setCurrentCoinsPrice] = useState(50);
+  const [upgradeAtMax0, setUpgradeAtMax0] = useState(false);
+  const [upgradeAtMax1, setUpgradeAtMax1] = useState(false);
+  const [upgradeAtMax2, setUpgradeAtMax2] = useState(false);
+  const [max, setMax] = useState(0.3);
+  const [min, setMin] = useState(0.05);
 
   useEffect(() => {
     if (totalValue >= levelValue) {
@@ -78,7 +88,14 @@ function App() {
   function renderCurrentPage() {
     switch (currentPage) {
       case "extractBtn":
-        return <ExtractPage balance={balance} setBalance={setBalance} />;
+        return (
+          <ExtractPage
+            balance={balance}
+            setBalance={setBalance}
+            max={max}
+            min={min}
+          />
+        );
       case "inventoryBtn":
         return (
           <InventoryPage
@@ -103,6 +120,8 @@ function App() {
             setStarIsFound={setStarIsFound}
             setBlackIsFound={setBlackIsFound}
             setCosmicIsFound={setCosmicIsFound}
+            certifiedMax={certifiedMax}
+            luck={luck}
           />
         );
       case "shopBtn":
@@ -132,11 +151,49 @@ function App() {
           />
         );
       case "upgradesBtn":
-        return <UpgradesPage />;
-      case "bettingBtn":
-        return <BettingPage setBalance={setBalance} balance={balance}/>;
+        return (
+          <UpgradesPage
+            setCertifiedMax={setCertifiedMax}
+            balance={balance}
+            setBalance={setBalance}
+            setLuck={setLuck}
+            setCurrentCertifiedPrice={setCurrentCertifiedPrice}
+            setCurrentLuckPrice={setCurrentLuckPrice}
+            setCurrentCoinsPrice={setCurrentCoinsPrice}
+            currentCoinsPrice={currentCoinsPrice}
+            currentLuckPrice={currentLuckPrice}
+            currentCertifiedPrice={currentCertifiedPrice}
+            upgradeAtMax0={upgradeAtMax0}
+            upgradeAtMax1={upgradeAtMax1}
+            upgradeAtMax2={upgradeAtMax2}
+            setUpgradeAtMax0={setUpgradeAtMax0}
+            setUpgradeAtMax1={setUpgradeAtMax1}
+            setUpgradeAtMax2={setUpgradeAtMax2}
+            setMax={setMax}
+            setMin={setMin}
+          />
+        );
+      case "enhanceBtn":
+        return (
+          <EnhancePage
+            ownedArtifacts={ownedArtifacts}
+            setOwnedArtifacts={setOwnedArtifacts}
+            levelValue={levelValue}
+            totalValue={totalValue}
+            setTotalValue={setTotalValue}
+            setValueProgress={setValueProgress}
+            valueProgress={valueProgress}
+          />
+        );
       default:
-        return <ExtractPage />;
+        return (
+          <ExtractPage
+            balance={balance}
+            setBalance={setBalance}
+            max={max}
+            min={min}
+          />
+        );
     }
   }
   function checkBalance() {
@@ -193,11 +250,11 @@ function App() {
             <i className="fa-solid fa-circle-up"></i> Upgrades
           </button>
           <button
-            id="bettingBtn"
-            className={activeButton == "bettingBtn" ? "activeBtn btn" : "btn"}
+            id="enhanceBtn"
+            className={activeButton == "enhanceBtn" ? "activeBtn btn" : "btn"}
             onClick={handleClick}
           >
-            <i className="fa-solid fa-dice"></i> Betting
+            <i className="fa-solid fa-bolt"></i> Enhance
           </button>
         </div>
         {renderCurrentPage()}
