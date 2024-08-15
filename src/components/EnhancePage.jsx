@@ -32,10 +32,11 @@ const EnhancePage = ({
     }, 300);
   };
   const [enhanceProgress, setEnhanceProgress] = useState(0);
+  let timeIntervalID;
+  let enhanceProgressInterval = null;
   useEffect(() => {
     if (currentPage === "beamEnhance") {
       let moveInterval;
-      let enhanceProgressInterval = null;
       let randomMovementInterval = setInterval(() => {
         const player = document.querySelector(".redPlayer");
         const playbox = document.querySelector(".playBoxContainer");
@@ -57,14 +58,19 @@ const EnhancePage = ({
               if (enhanceProgress >= 100) {
                 clearInterval(enhanceProgressInterval);
                 enhanceProgressInterval = null;
-                beam.style.animation = "tractorBeamHit 0.7s infinite forwards";
                 clearInterval(randomMovementInterval);
                 randomMovementInterval = null;
                 window.removeEventListener("keydown", handleKeyDown);
                 window.removeEventListener("keyup", handleKeyUp);
                 clearInterval(moveInterval);
-                beam.style.transform = `rotate(0deg)`;
+                clearInterval(timeIntervalID);
                 player.style.left = playboxWidth / 2 + "px";
+                rotateBeam();
+                activeEnhanceItem.value *= 2;
+                activeEnhanceItem.enhanced = true;
+                setTimeout(() => {
+                  setCurrentPage("main");
+                }, 1000);
               } else {
                 setEnhanceProgress((prevProgress) => prevProgress + 1);
               }
@@ -107,10 +113,8 @@ const EnhancePage = ({
                               const newProgress = prevProgress + 1;
                               if (newProgress >= 100) {
                                 clearInterval(enhanceProgressInterval);
-                                enhanceProgressInterval = null;
-                                beam.style.animation =
-                                  "tractorBeamHit 0.7s infinite forwards";
                                 clearInterval(randomMovementInterval);
+                                clearInterval(timeIntervalID);
                                 window.removeEventListener(
                                   "keydown",
                                   handleKeyDown
@@ -121,8 +125,14 @@ const EnhancePage = ({
                                 );
                                 clearInterval(moveInterval);
                                 randomMovementInterval = null;
-                                beam.style.transform = `rotate(0deg)`;
+                                enhanceProgressInterval = null;
                                 player.style.left = playboxWidth / 2 + "px";
+                                rotateBeam();
+                                activeEnhanceItem.value *= 2;
+                                activeEnhanceItem.enhanced = true;
+                                setTimeout(() => {
+                                  setCurrentPage("main");
+                                }, 1000);
                                 return 100;
                               } else {
                                 return newProgress;
@@ -155,9 +165,6 @@ const EnhancePage = ({
                             setEnhanceProgress((prevProgress) => {
                               const newProgress = prevProgress + 1;
                               if (newProgress >= 100) {
-                                enhanceProgressInterval = null;
-                                beam.style.animation =
-                                  "tractorBeamHit 0.7s infinite forwards";
                                 window.removeEventListener(
                                   "keydown",
                                   handleKeyDown
@@ -169,9 +176,16 @@ const EnhancePage = ({
                                 clearInterval(moveInterval);
                                 clearInterval(randomMovementInterval);
                                 clearInterval(enhanceProgressInterval);
+                                clearInterval(timeIntervalID);
+                                enhanceProgressInterval = null;
                                 randomMovementInterval = null;
-                                beam.style.transform = `rotate(0deg)`;
+                                activeEnhanceItem.value *= 2;
+                                activeEnhanceItem.enhanced = true;
                                 player.style.left = playboxWidth / 2 + "px";
+                                rotateBeam();
+                                setTimeout(() => {
+                                  setCurrentPage("main");
+                                }, 1000);
                                 return 100;
                               } else {
                                 return newProgress;
@@ -212,7 +226,7 @@ const EnhancePage = ({
         const beam = document.querySelector(".beamCont");
         const beamX = beam.offsetLeft + beam.offsetWidth / 2;
         const playbox = document.querySelector(".playBoxContainer");
-        const playboxCenterX = playbox.offsetWidth / 2;
+        const playboxCenterX = playbox?.offsetWidth / 2;
 
         const player = document.querySelector(".redPlayer");
         const playerX = player.offsetLeft + player.offsetWidth / 2;
@@ -241,6 +255,34 @@ const EnhancePage = ({
       };
     }
   }, [currentPage]);
+  const [time, setTime] = useState(100);
+  useEffect(() => {
+    if (currentPage === "beamEnhance") {
+      const imgCont = document.querySelector(".imgCont");
+      const image = document.querySelector(".enhancingItemImage");
+      timeIntervalID = setInterval(() => {
+        setTime((prevTime) => {
+          if (prevTime <= 0) {
+            clearInterval(timeIntervalID);
+            setCurrentPage("main");
+            setOwnedArtifacts((prevArtifacts) =>
+              prevArtifacts.filter(
+                (ownedArtifact) =>
+                  ownedArtifact.newArtifact !== activeEnhanceItem
+              )
+            );
+            return 100;
+          } else {
+            imgCont.style.bottom = prevTime + "px";
+            return prevTime - 1;
+          }
+        });
+      }, 1000);
+    }
+    return () => {
+      clearInterval(timeIntervalID);
+    };
+  }, [currentPage]);
   return (
     <>
       {currentPage === "main" && (
@@ -259,14 +301,20 @@ const EnhancePage = ({
                   .filter(
                     (ownedArtifact) =>
                       ownedArtifact?.newArtifact?.name &&
-                      ownedArtifact?.newArtifact?.img
+                      ownedArtifact?.newArtifact?.img &&
+                      !ownedArtifact?.newArtifact?.enhanced
                   )
+                  .sort((a, b) => b.newArtifact.value - a.newArtifact.value)
                   .map((ownedArtifact, index) => (
                     <ItemToBeSelected
                       key={`${ownedArtifact?.name}-${index}`}
                       itemID={ownedArtifact?.newArtifact}
                       sampleImg={ownedArtifact.newArtifact?.img}
-                      sampleName={ownedArtifact.newArtifact?.name}
+                      sampleName={
+                        ownedArtifact.newArtifact?.hiddenName
+                          ? ownedArtifact.newArtifact?.hiddenName
+                          : ownedArtifact.newArtifact?.name
+                      }
                       setOwnedArtifacts={setOwnedArtifacts}
                       ownedArtifacts={ownedArtifacts}
                       levelValue={levelValue}
@@ -300,11 +348,15 @@ const EnhancePage = ({
               {enhanceProgress >= 100 ? 100 : enhanceProgress}%
             </div>
           )}
-          <img
-            src={activeEnhanceItem.img}
-            alt={activeEnhanceItem.name}
-            className="enhancingItemImage"
-          />
+          <div className="imgCont">
+            <img
+              src={activeEnhanceItem.img}
+              alt={activeEnhanceItem.name}
+              className="enhancingItemImage"
+            />
+            <div className="chain"></div>
+          </div>
+          <div className="lava"></div>
         </div>
       )}
     </>
@@ -331,7 +383,14 @@ const ItemToBeSelected = ({
   return (
     <div className={`itemCont ${itemID.rarity}`}>
       <img src={sampleImg} alt={`${sampleName} image`} />
-      <h1>{sampleName}</h1>
+      <h1>
+        {sampleName}{" "}
+        {itemID?.isCertified ? (
+          <i className="fa-solid fa-star" style={{ color: "yellow" }}></i>
+        ) : (
+          ""
+        )}
+      </h1>
       <button className="selectBtn" onClick={handleSelectItem}>
         Select
       </button>

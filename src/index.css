@@ -24,7 +24,7 @@ body {
   font-size: 8.5rem;
 }
 .artifact {
-  width: calc(25% - 15px);
+  width: calc(25% - 19px);
   aspect-ratio: 1 / 1;
   margin: 7.5px;
   border-radius: 8px;

@@ -833,7 +833,7 @@ const OwnedSample = ({
     }
   };
   return (
-    <div className={`artifact ${itemID?.price ? "normal" : itemID?.rarity}`}>
+    <div className={`artifact ${itemID?.price ? "normal" : itemID?.rarity} ${itemID?.enhanced ? "enhancedItem" : ""}`}>
       <img src={sampleImg} alt={sampleName} />
       <h2>
         {itemID?.rarity === "Mythical" || itemID?.rarity === "Godly"
