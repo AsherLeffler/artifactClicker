@@ -33,11 +33,14 @@ function App() {
   const [currentCertifiedPrice, setCurrentCertifiedPrice] = useState(200);
   const [currentLuckPrice, setCurrentLuckPrice] = useState(500);
   const [currentCoinsPrice, setCurrentCoinsPrice] = useState(50);
+  const [currentEnhancePrice, setCurrentEnhancePrice] = useState(500);
   const [upgradeAtMax0, setUpgradeAtMax0] = useState(false);
   const [upgradeAtMax1, setUpgradeAtMax1] = useState(false);
   const [upgradeAtMax2, setUpgradeAtMax2] = useState(false);
+  const [upgradeAtMax3, setUpgradeAtMax3] = useState(false);
   const [max, setMax] = useState(0.3);
   const [min, setMin] = useState(0.05);
+  const [enhancingEfficiency, setEnhancingEfficiency] = useState(200);
 
   useEffect(() => {
     if (totalValue >= levelValue) {
@@ -160,17 +163,22 @@ function App() {
             setCurrentCertifiedPrice={setCurrentCertifiedPrice}
             setCurrentLuckPrice={setCurrentLuckPrice}
             setCurrentCoinsPrice={setCurrentCoinsPrice}
+            setCurrentEnhancePrice={setCurrentEnhancePrice}
             currentCoinsPrice={currentCoinsPrice}
             currentLuckPrice={currentLuckPrice}
             currentCertifiedPrice={currentCertifiedPrice}
+            currentEnhancePrice={currentEnhancePrice}
             upgradeAtMax0={upgradeAtMax0}
             upgradeAtMax1={upgradeAtMax1}
             upgradeAtMax2={upgradeAtMax2}
+            upgradeAtMax3={upgradeAtMax3}
             setUpgradeAtMax0={setUpgradeAtMax0}
             setUpgradeAtMax1={setUpgradeAtMax1}
             setUpgradeAtMax2={setUpgradeAtMax2}
+            setUpgradeAtMax3={setUpgradeAtMax3}
             setMax={setMax}
             setMin={setMin}
+            setEnhancingEfficiency={setEnhancingEfficiency}
           />
         );
       case "enhanceBtn":
@@ -183,6 +191,7 @@ function App() {
             setTotalValue={setTotalValue}
             setValueProgress={setValueProgress}
             valueProgress={valueProgress}
+            enhancingEfficiency={enhancingEfficiency}
           />
         );
       default:

@@ -8,6 +8,7 @@ const EnhancePage = ({
   setTotalValue,
   setValueProgress,
   valueProgress,
+  enhancingEfficiency,
 }) => {
   const [selectItemActive, setSelectItemActive] = useState(false);
   const [activeEnhanceItem, setActiveEnhanceItem] = useState(null);
@@ -74,7 +75,7 @@ const EnhancePage = ({
               } else {
                 setEnhanceProgress((prevProgress) => prevProgress + 1);
               }
-            }, 200);
+            }, enhancingEfficiency);
           }
         } else {
           if (enhanceProgressInterval) {
@@ -138,7 +139,7 @@ const EnhancePage = ({
                                 return newProgress;
                               }
                             });
-                          }, 200);
+                          }, enhancingEfficiency);
                         }
                       } else {
                         if (enhanceProgressInterval) {
@@ -191,7 +192,7 @@ const EnhancePage = ({
                                 return newProgress;
                               }
                             });
-                          }, 200);
+                          }, enhancingEfficiency);
                         }
                       } else {
                         if (enhanceProgressInterval) {

@@ -8,21 +8,27 @@ const UpgradesPage = ({
   currentCertifiedPrice,
   currentLuckPrice,
   currentCoinsPrice,
+  currentEnhancePrice,
   upgradeAtMax0,
   upgradeAtMax1,
   upgradeAtMax2,
+  upgradeAtMax3,
   setUpgradeAtMax0,
   setUpgradeAtMax1,
   setUpgradeAtMax2,
+  setUpgradeAtMax3,
   setCurrentCertifiedPrice,
   setCurrentLuckPrice,
   setCurrentCoinsPrice,
+  setCurrentEnhancePrice,
   setMax,
   setMin,
+  setEnhancingEfficiency,
 }) => {
   const [coinsCantBuy, setCoinsCantBuy] = useState(false);
   const [luckCantBuy, setLuckCantBuy] = useState(false);
   const [certifiedCantBuy, setCertifiedCantBuy] = useState(false);
+  const [enhanceCantBuy, setEnhanceCantBuy] = useState(false);
   const buyCoins = () => {
     if (currentCoinsPrice !== "Max") {
       if (balance >= currentCoinsPrice) {
@@ -154,6 +160,41 @@ const UpgradesPage = ({
       }
     }
   };
+  const buyEnhance = () => {
+    if (currentEnhancePrice !== "Max") {
+      if (balance >= currentEnhancePrice) {
+        setBalance((prevBalance) => prevBalance - currentEnhancePrice);
+        switch (currentEnhancePrice) {
+          case 500: {
+            setCurrentEnhancePrice(2500);
+            setEnhancingEfficiency(180);
+            break;
+          }
+          case 2500: {
+            setCurrentEnhancePrice(15000);
+            setEnhancingEfficiency(160);
+            break;
+          }
+          case 15000: {
+            setCurrentEnhancePrice(120000);
+            setEnhancingEfficiency(140);
+            break;
+          }
+          case 120000: {
+            setCurrentEnhancePrice("Max");
+            setEnhancingEfficiency(120);
+            setUpgradeAtMax3(true);
+            break;
+          }
+        }
+      } else {
+        setEnhanceCantBuy(true);
+        setTimeout(() => {
+          setEnhanceCantBuy(false);
+        }, 500);
+      }
+    }
+  };
   const findMaxCoins = () => {
     switch (currentCoinsPrice) {
       case 50:
@@ -204,6 +245,20 @@ const UpgradesPage = ({
         return "50%";
     }
   };
+  const findEnhancePrice = () => {
+    switch (currentEnhancePrice) {
+      case 500:
+        return 0;
+      case 2500:
+        return 1;
+      case 15000:
+        return 2;
+      case 120000:
+        return 3;
+      case "Max":
+        return 4;
+    }
+  };
   return (
     <div className="rightPage upgrades">
       <div className="upgradesWrapper">
@@ -238,6 +293,17 @@ const UpgradesPage = ({
             }`}
           >
             {currentCertifiedPrice}
+          </button>
+        </div>
+        <div className="upgradeCont">
+          <p>{`Enhancing Efficiency: ${findEnhancePrice()}`}</p>
+          <button
+            onClick={buyEnhance}
+            className={`${upgradeAtMax3 ? "max" : "notMax"} ${
+              enhanceCantBuy ? "red" : (upgradeAtMax3 ? "" : "blue")
+            }`}
+          >
+            {currentEnhancePrice}
           </button>
         </div>
       </div>
