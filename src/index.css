@@ -336,11 +336,11 @@ body {
       135deg,
       #383838,
       #525252,
-      #5f4949,
+      #49575f,
       #525252,
       #383838
     ),
-    linear-gradient(45deg, #383838, #525252, #5f4949, #525252, #383838);
+    linear-gradient(45deg, #383838, #525252, #49575f, #525252, #383838);
   background-blend-mode: overlay;
   overflow-x: hidden;
 }

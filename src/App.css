@@ -541,16 +541,16 @@
 .enhanceCont {
   background: linear-gradient(
       75deg,
-      rgb(73, 53, 53),
-      rgb(161, 116, 116),
-      rgb(73, 53, 53)
+      rgb(53, 64, 73),
+      rgb(116, 147, 161),
+      rgb(53, 67, 73)
     ),
     linear-gradient(
       105deg,
-      rgb(73, 53, 53),
-      rgb(161, 116, 116),
-      rgb(73, 53, 53)
-      );
+      rgb(53, 64, 73),
+      rgb(116, 138, 161),
+      rgb(53, 65, 73)
+    );
   background-blend-mode: overlay;
   width: 40%;
   aspect-ratio: 1;
@@ -563,13 +563,13 @@
   justify-content: space-evenly;
 }
 .bolt {
-  color: rgb(255, 181, 181);
+  color: rgb(147, 194, 255);
   font-size: 11rem;
   margin: 0;
   transition: 0.15s;
   cursor: pointer;
 }
-.bolt:hover{
+.bolt:hover {
   font-size: 11.8rem;
 }
 .selectItem {
@@ -581,9 +581,9 @@
   justify-content: start;
   background: linear-gradient(
     90deg,
-    rgb(145, 105, 105),
-    rgb(194, 140, 140),
-    rgb(145, 105, 105)
+    rgb(105, 127, 145),
+    rgb(140, 171, 194),
+    rgb(105, 127, 145)
   );
   border-radius: 20px;
   transition: all 0.3s ease;
@@ -662,14 +662,189 @@
   aspect-ratio: 1 / 1;
   border-radius: 14px;
 }
-.enhancingItemImage{
-  width: 20%;
+.enhancingItemImage {
+  width: 18%;
   aspect-ratio: 1;
+  z-index: 1;
+  opacity: 0.6;
 }
-.enhanceScene{
+.enhanceScene {
   display: flex;
   justify-content: center;
   align-items: end;
   position: relative;
   overflow: hidden;
+}
+.beams {
+  width: 120px;
+  background-color: white;
+  position: absolute;
+  border-radius: 8px;
+  top: -40px;
+  height: 140vh;
+  transform-origin: top center;
+  transition: transform 0.3s ease, height 0.3s ease;
+  animation: tractorBeamHit 0.7s infinite forwards;
+}
+.beamBase {
+  width: 340px;
+  aspect-ratio: 1 / 0.6;
+  position: absolute;
+  top: -140px;
+  z-index: 2;
+}
+.notGood {
+  flex: 0.44;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: rgb(91, 91, 91);
+}
+.good {
+  flex: 0.12;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: rgb(72, 255, 93);
+}
+.beamBase::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgb(255, 142, 142), rgb(255, 0, 0));
+  clip-path: polygon(30% 100%, 70% 100%, 100% 0%, 0% 0%);
+}
+.beamCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-origin: top center;
+}
+.playBoxContainer {
+  width: 65%;
+  height: 40px;
+  display: flex;
+  position: absolute;
+  justify-content: space-between;
+  align-items: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.75;
+}
+.selectItem h3{
+  color: white;
+  font-family: "Antic", sans-serif;
+  font-size: 1.4rem;
+  position: absolute;
+  top: -5px;
+  right: 40px;
+  text-decoration: underline;
+}
+.displayEnhanceProgress{
+  font-family: monospace;
+  font-size: 1.5rem;
+  color: rgb(0, 162, 255);
+  font-weight: bold;
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.redPlayer{
+  background-color: red;
+  height: 100%;
+  width: 10px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@keyframes tractorBeamMiss {
+  0% {
+    background-color: white;
+    box-shadow: 0 0 10px 12px rgba(255, 255, 255, 0.18);
+  }
+  12.5% {
+    background-color: rgb(255, 255, 238);
+    box-shadow: 0 0 10px 12px rgba(255, 255, 238, 0.15);
+  }
+  25% {
+    background-color: rgb(255, 251, 229);
+    box-shadow: 0 0 10px 12px rgba(255, 251, 229, 0.12);
+  }
+  37.5% {
+    background-color: rgb(156, 156, 156);
+    box-shadow: 0 0 10px 12px rgba(255, 255, 255, 0.09);
+  }
+  50% {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 10px 12px rgba(255, 255, 255, 0.05);
+  }
+  62.5% {
+    background-color: rgb(156, 156, 156);
+    box-shadow: 0 0 10px 12px rgba(255, 255, 255, 0.09);
+  }
+  75% {
+    background-color: rgb(255, 251, 229);
+    box-shadow: 0 0 10px 12px rgba(255, 251, 229, 0.12);
+  }
+  87.5% {
+    background-color: rgb(255, 255, 238);
+    box-shadow: 0 0 10px 12px rgba(255, 255, 238, 0.15);
+  }
+  100% {
+    background-color: white;
+    box-shadow: 0 0 10px 12px rgba(255, 255, 255, 0.18);
+  }
+}
+@keyframes tractorBeamHit {
+  0% {
+    background-color: rgb(159, 221, 255);
+    box-shadow: 0 0 10px 12px rgba(159, 221, 255, 0.18);
+  }
+  12.5% {
+    background-color: rgb(102, 214, 255);
+    box-shadow: 0 0 10px 12px rgba(102, 214, 255, 0.15);
+  }
+  25% {
+    background-color: rgb(0, 187, 255);
+    box-shadow: 0 0 10px 12px rgba(0, 187, 255, 0.12);
+  }
+  37.5% {
+    background-color: rgb(102, 214, 255);
+    box-shadow: 0 0 10px 12px rgba(102, 214, 255, 0.09);
+  }
+  50% {
+    background-color: rgb(159, 221, 255);
+    box-shadow: 0 0 10px 12px rgba(159, 221, 255, 0.05);
+  }
+  62.5% {
+    background-color: rgb(102, 214, 255);
+    box-shadow: 0 0 10px 12px rgba(102, 214, 255, 0.09);
+  }
+  75% {
+    background-color: rgb(0, 187, 255);
+    box-shadow: 0 0 10px 12px rgba(0, 187, 255, 0.12);
+  }
+  87.5% {
+    background-color: rgb(102, 214, 255);
+    box-shadow: 0 0 10px 12px rgba(102, 214, 255, 0.15);
+  }
+  100% {
+    background-color: rgb(159, 221, 255);
+    box-shadow: 0 0 10px 12px rgba(159, 221, 255, 0.18);
+  }
 }
