@@ -176,13 +176,13 @@ const OwnedSample = ({
       prevOwnedArtifacts.filter(
         (ownedArtifact) =>
           (ownedArtifact.itemID
-            ? ownedArtifact.itemID
-            : ownedArtifact.newArtifact) !== itemID
+            ? ownedArtifact.itemID.identifyer
+            : ownedArtifact.newArtifact.identifyer) !== itemID.identifyer
       )
     );
-    const newTotalValue = Math.round(
+    const newTotalValue = (
       totalValue - (itemID.price ? itemID.price : itemID.value)
-    );
+    ).toFixed(2);
     const newValueProgress = ((levelValue - newTotalValue) / levelValue) * 100;
     setTotalValue(newTotalValue);
     setValueProgress(newValueProgress);
@@ -545,7 +545,7 @@ const OwnedSample = ({
     const hasGodly = itemID?.artifacts[19].rarity === "Godly" ? true : false;
     if (luck === 0) {
       if (randomNumber <= 7) {
-        if (hasTerrible &&  randomNumber === 0) {
+        if (hasTerrible && randomNumber === 0) {
           return "Terrible";
         } else {
           return "Common";
@@ -595,7 +595,7 @@ const OwnedSample = ({
     }
     if (luck === 2) {
       if (randomNumber <= 4) {
-        if (hasTerrible &&  randomNumber === 0) {
+        if (hasTerrible && randomNumber === 0) {
           return "Terrible";
         } else {
           return "Common";
@@ -620,7 +620,7 @@ const OwnedSample = ({
     }
     if (luck === 3) {
       if (randomNumber <= 4) {
-        if (hasTerrible &&  randomNumber === 0) {
+        if (hasTerrible && randomNumber === 0) {
           return "Terrible";
         } else {
           return "Common";
@@ -645,7 +645,7 @@ const OwnedSample = ({
     }
     if (luck === 4) {
       if (randomNumber <= 3) {
-        if (hasTerrible &&  randomNumber === 0) {
+        if (hasTerrible && randomNumber === 0) {
           return "Terrible";
         } else {
           return "Common";
@@ -675,19 +675,19 @@ const OwnedSample = ({
         return itemID?.artifacts[0];
         break;
       case "Common":
-        const commonRandomNum = Math.round(Math.random() * 7)
+        const commonRandomNum = Math.round(Math.random() * 7);
         return itemID?.artifacts[commonRandomNum];
         break;
       case "Uncommon":
-        const uncommonRandomNum = Math.round(Math.random() * (13 - 8) + 8)
+        const uncommonRandomNum = Math.round(Math.random() * (13 - 8) + 8);
         return itemID?.artifacts[uncommonRandomNum];
         break;
       case "Rare":
-        const rareRandomNum = Math.round(Math.random() * (16 - 14) + 14)
+        const rareRandomNum = Math.round(Math.random() * (16 - 14) + 14);
         return itemID?.artifacts[rareRandomNum];
         break;
       case "Unique":
-        const uniqueRandomNum = Math.round(Math.random() * (18 - 17) + 17)
+        const uniqueRandomNum = Math.round(Math.random() * (18 - 17) + 17);
         return itemID?.artifacts[uniqueRandomNum];
         break;
       case "Mythic":
@@ -710,6 +710,7 @@ const OwnedSample = ({
               Math.random() * (certifiedMax - 1) + 1
             );
             const newArtifact = findRarityArtifact(rarity);
+            newArtifact.identifyer = ownedArtifacts.length + i;
             const hiddenItem = document.querySelector(".itemIdentifyer");
             if (isCertified === 1) {
               newArtifact.value = newArtifact.value * 2;
@@ -772,8 +773,9 @@ const OwnedSample = ({
                   break;
               }
             }
-            const newTotalValue = Math.round(
-              valueAfterDropReduced + valueToAdd
+            valueAfterDropReduced = Number(valueAfterDropReduced);
+            const newTotalValue = (valueAfterDropReduced + valueToAdd).toFixed(
+              2
             );
             const newValueProgress =
               ((levelValue - newTotalValue) / levelValue) * 100;
@@ -809,7 +811,9 @@ const OwnedSample = ({
         return true; // Keep this item
       });
     });
-    const newTotalValue = Math.round(totalValue - itemID?.price * amountToOpen);
+    const newTotalValue = (totalValue - itemID?.price * amountToOpen).toFixed(
+      2
+    );
     const newValueProgress = ((levelValue - newTotalValue) / levelValue) * 100;
     setTotalValue(newTotalValue);
     setValueProgress(newValueProgress);
@@ -833,7 +837,11 @@ const OwnedSample = ({
     }
   };
   return (
-    <div className={`artifact ${itemID?.price ? "normal" : itemID?.rarity} ${itemID?.enhanced ? "enhancedItem" : ""}`}>
+    <div
+      className={`artifact ${itemID?.price ? "normal" : itemID?.rarity} ${
+        itemID?.enhanced ? "enhancedItem" : ""
+      }`}
+    >
       <img src={sampleImg} alt={sampleName} />
       <h2>
         {itemID?.rarity === "Mythical" || itemID?.rarity === "Godly"

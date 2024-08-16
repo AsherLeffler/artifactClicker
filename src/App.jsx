@@ -41,6 +41,7 @@ function App() {
   const [max, setMax] = useState(0.3);
   const [min, setMin] = useState(0.05);
   const [enhancingEfficiency, setEnhancingEfficiency] = useState(200);
+  const [leftIsHidden, setLeftIsHidden] = useState(false);
 
   useEffect(() => {
     if (totalValue >= levelValue) {
@@ -192,6 +193,7 @@ function App() {
             setValueProgress={setValueProgress}
             valueProgress={valueProgress}
             enhancingEfficiency={enhancingEfficiency}
+            setLeftIsHidden={setLeftIsHidden}
           />
         );
       default:
@@ -215,7 +217,7 @@ function App() {
   return (
     <>
       <div id="mainBody">
-        <div id="leftMenu">
+        <div id="leftMenu" className={leftIsHidden ? "leftIsHidden" : "leftIsNotHidden"}>
           <div id="balanceBox">
             <h2>
               <i className="fa-solid fa-coins"></i> {checkBalance()}

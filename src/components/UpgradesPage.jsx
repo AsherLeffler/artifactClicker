@@ -285,7 +285,7 @@ const UpgradesPage = ({
           </button>
         </div>
         <div className="upgradeCont">
-          <p>{`Certified Luck: ${findCertifiedPrice()}`}</p>
+          <p>{`Certified Chance: ${findCertifiedPrice()}`}</p>
           <button
             onClick={buyCertified}
             className={`${upgradeAtMax1 ? "max" : "notMax"} ${

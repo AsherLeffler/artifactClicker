@@ -1276,7 +1276,7 @@ const ShopPage = ({
           rarity: "Uncommon",
         },
         {
-          img: "/src/assets/artifactImages/starCoreShard.png",
+          img: "/src/assets/artifactImages/starCoreShard.jpg",
           name: "Core Shard",
           value: 304899,
           rarity: "Uncommon",

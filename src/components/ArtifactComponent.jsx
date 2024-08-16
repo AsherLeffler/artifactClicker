@@ -20,6 +20,7 @@ const ArtifactComponent = ({
     document.getElementById("progressBar").style.width = `${newValueProgress}%`;
   }
   const addOwnedArtifact = () => {
+    itemID.identifyer = ownedArtifacts.length + 1;
     setOwnedArtifacts((prevOwnedArtifacts) => [
       ...prevOwnedArtifacts,
       { itemID },

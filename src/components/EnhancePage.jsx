@@ -9,6 +9,7 @@ const EnhancePage = ({
   setValueProgress,
   valueProgress,
   enhancingEfficiency,
+  setLeftIsHidden,
 }) => {
   const [selectItemActive, setSelectItemActive] = useState(false);
   const [activeEnhanceItem, setActiveEnhanceItem] = useState(null);
@@ -57,6 +58,17 @@ const EnhancePage = ({
           if (!enhanceProgressInterval) {
             enhanceProgressInterval = setInterval(() => {
               if (enhanceProgress >= 100) {
+                const newTotalValue = (
+                  totalValue + activeEnhanceItem.value
+                ).toFixed(2);
+                console.log(newTotalValue);
+                const newValueProgress =
+                  ((levelValue - newTotalValue) / levelValue) * 100;
+                setTotalValue(newTotalValue);
+                setValueProgress(newValueProgress);
+                document.getElementById(
+                  "progressBar"
+                ).style.width = `${newValueProgress}%`;
                 clearInterval(enhanceProgressInterval);
                 enhanceProgressInterval = null;
                 clearInterval(randomMovementInterval);
@@ -71,6 +83,7 @@ const EnhancePage = ({
                 activeEnhanceItem.enhanced = true;
                 setTimeout(() => {
                   setCurrentPage("main");
+                  setLeftIsHidden(false);
                 }, 1000);
               } else {
                 setEnhanceProgress((prevProgress) => prevProgress + 1);
@@ -113,6 +126,17 @@ const EnhancePage = ({
                             setEnhanceProgress((prevProgress) => {
                               const newProgress = prevProgress + 1;
                               if (newProgress >= 100) {
+                                const newTotalValue = (
+                                  totalValue + activeEnhanceItem.value
+                                ).toFixed(2);
+                                const newValueProgress =
+                                  ((levelValue - newTotalValue) / levelValue) *
+                                  100;
+                                setTotalValue(newTotalValue);
+                                setValueProgress(newValueProgress);
+                                document.getElementById(
+                                  "progressBar"
+                                ).style.width = `${newValueProgress}%`;
                                 clearInterval(enhanceProgressInterval);
                                 clearInterval(randomMovementInterval);
                                 clearInterval(timeIntervalID);
@@ -133,6 +157,7 @@ const EnhancePage = ({
                                 activeEnhanceItem.enhanced = true;
                                 setTimeout(() => {
                                   setCurrentPage("main");
+                                  setLeftIsHidden(false);
                                 }, 1000);
                                 return 100;
                               } else {
@@ -166,6 +191,17 @@ const EnhancePage = ({
                             setEnhanceProgress((prevProgress) => {
                               const newProgress = prevProgress + 1;
                               if (newProgress >= 100) {
+                                const newTotalValue = (
+                                  totalValue + activeEnhanceItem.value
+                                ).toFixed(2);
+                                const newValueProgress =
+                                  ((levelValue - newTotalValue) / levelValue) *
+                                  100;
+                                setTotalValue(newTotalValue);
+                                setValueProgress(newValueProgress);
+                                document.getElementById(
+                                  "progressBar"
+                                ).style.width = `${newValueProgress}%`;
                                 window.removeEventListener(
                                   "keydown",
                                   handleKeyDown
@@ -186,6 +222,7 @@ const EnhancePage = ({
                                 rotateBeam();
                                 setTimeout(() => {
                                   setCurrentPage("main");
+                                  setLeftIsHidden(false);
                                 }, 1000);
                                 return 100;
                               } else {
@@ -264,8 +301,19 @@ const EnhancePage = ({
       timeIntervalID = setInterval(() => {
         setTime((prevTime) => {
           if (prevTime <= 0) {
+            const newTotalValue = (
+              totalValue - activeEnhanceItem.value
+            ).toFixed(2);
+            const newValueProgress =
+              ((levelValue - newTotalValue) / levelValue) * 100;
+            setTotalValue(newTotalValue);
+            setValueProgress(newValueProgress);
+            document.getElementById(
+              "progressBar"
+            ).style.width = `${newValueProgress}%`;
             clearInterval(timeIntervalID);
             setCurrentPage("main");
+            setLeftIsHidden(false);
             setOwnedArtifacts((prevArtifacts) =>
               prevArtifacts.filter(
                 (ownedArtifact) =>
@@ -325,6 +373,7 @@ const EnhancePage = ({
                       activeEnhanceItem={activeEnhanceItem}
                       setActiveEnhanceItem={setActiveEnhanceItem}
                       setCurrentPage={setCurrentPage}
+                      setLeftIsHidden={setLeftIsHidden}
                     />
                   ))}
               </div>
@@ -339,9 +388,9 @@ const EnhancePage = ({
             <div className="beams"></div>
           </div>
           <div className="playBoxContainer">
-            <div className="notGood"></div>
+            <div className="notGood1"></div>
             <div className="good"></div>
-            <div className="notGood"></div>
+            <div className="notGood2"></div>
             <div className="redPlayer"></div>
           </div>
           {enhanceProgress >= 0 && (
@@ -357,7 +406,9 @@ const EnhancePage = ({
             />
             <div className="chain"></div>
           </div>
-          <div className="lava"></div>
+          <div className="bottomContainer">
+            <div className="lava"></div>
+          </div>
         </div>
       )}
     </>
@@ -376,10 +427,12 @@ const ItemToBeSelected = ({
   activeEnhanceItem,
   setActiveEnhanceItem,
   setCurrentPage,
+  setLeftIsHidden,
 }) => {
   const handleSelectItem = () => {
     setActiveEnhanceItem(itemID);
     setCurrentPage("beamEnhance");
+    setLeftIsHidden(true);
   };
   return (
     <div className={`itemCont ${itemID.rarity}`}>
