@@ -110,8 +110,8 @@ function App() {
     if (storedUpgradeAtMax1) setUpgradeAtMax1(JSON.parse(storedUpgradeAtMax1));
     if (storedUpgradeAtMax2) setUpgradeAtMax2(JSON.parse(storedUpgradeAtMax2));
     if (storedUpgradeAtMax3) setUpgradeAtMax3(JSON.parse(storedUpgradeAtMax3));
-    if (storedMax) setMax(storedMax);
-    if (storedMin) setMin(storedMin);
+    if (storedMax) setMax(Number(storedMax));
+    if (storedMin) setMin(Number(storedMin));
     if (storedEnhancingEfficiency)
       setEnhancingEfficiency(storedEnhancingEfficiency);
   }, []);
