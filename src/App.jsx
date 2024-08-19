@@ -25,7 +25,7 @@ function App() {
   const [moonIsFound, setMoonIsFound] = useState(false);
   const [meteorIsFound, setMeteorIsFound] = useState(false);
   const [alienIsFound, setAlienIsFound] = useState(false);
-  const [starIsFound, setStarIsFound] = useState(false);
+  const [starIsFound, setStarIsFound] = useState(true);
   const [blackIsFound, setBlackIsFound] = useState(false);
   const [cosmicIsFound, setCosmicIsFound] = useState(false);
   const [certifiedMax, setCertifiedMax] = useState(8);
