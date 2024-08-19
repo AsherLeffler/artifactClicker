@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Component, useState } from "react";
 
 const UpgradesPage = ({
   setCertifiedMax,
@@ -211,6 +211,8 @@ const UpgradesPage = ({
         return 5;
       case "Max":
         return 6;
+      default:
+        return "Not in Specified Range";
     }
   };
   const findLuckPrice = () => {
@@ -225,6 +227,8 @@ const UpgradesPage = ({
         return 3;
       case "Max":
         return 4;
+      default:
+        return "Not in Specified Range";
     }
   };
   const findCertifiedPrice = () => {
@@ -243,6 +247,8 @@ const UpgradesPage = ({
         return "33.3%";
       case "Max":
         return "50%";
+      default:
+        return "Not in Specified Range";
     }
   };
   const findEnhancePrice = () => {
@@ -257,6 +263,8 @@ const UpgradesPage = ({
         return 3;
       case "Max":
         return 4;
+      default:
+        return "Not in Specified Range";
     }
   };
   return (
@@ -267,7 +275,7 @@ const UpgradesPage = ({
           <button
             onClick={buyCoins}
             className={`${upgradeAtMax0 ? "max" : "notMax"} ${
-              coinsCantBuy ? "red" : (upgradeAtMax0 ? "" : "blue")
+              coinsCantBuy ? "red" : upgradeAtMax0 ? "" : "blue"
             }`}
           >
             {currentCoinsPrice}
@@ -278,7 +286,7 @@ const UpgradesPage = ({
           <button
             onClick={buyLuck}
             className={`${upgradeAtMax2 ? "max" : "notMax"} ${
-              luckCantBuy ? "red" : (upgradeAtMax2 ? "" : "blue")
+              luckCantBuy ? "red" : upgradeAtMax2 ? "" : "blue"
             }`}
           >
             {currentLuckPrice}
@@ -289,7 +297,7 @@ const UpgradesPage = ({
           <button
             onClick={buyCertified}
             className={`${upgradeAtMax1 ? "max" : "notMax"} ${
-              certifiedCantBuy ? "red" : (upgradeAtMax1 ? "" : "blue")
+              certifiedCantBuy ? "red" : upgradeAtMax1 ? "" : "blue"
             }`}
           >
             {currentCertifiedPrice}
@@ -300,7 +308,7 @@ const UpgradesPage = ({
           <button
             onClick={buyEnhance}
             className={`${upgradeAtMax3 ? "max" : "notMax"} ${
-              enhanceCantBuy ? "red" : (upgradeAtMax3 ? "" : "blue")
+              enhanceCantBuy ? "red" : upgradeAtMax3 ? "" : "blue"
             }`}
           >
             {currentEnhancePrice}

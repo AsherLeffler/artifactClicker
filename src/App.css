@@ -127,13 +127,6 @@
   padding: 7.5px;
   height: calc(100vh - 15px);
 }
-.bettingPage {
-  display: flex;
-  padding: 7.5px;
-  height: calc(100vh - 15px);
-  justify-content: center;
-  align-items: center;
-}
 .itemMenu {
   display: flex;
   justify-content: center;
@@ -437,7 +430,6 @@
 .openImg4 {
   transition: opacity 0.3s ease, visibility 0.3s ease;
   width: 18%;
-  min-width: 180px;
   aspect-ratio: 1 / 1;
   position: relative;
 }
@@ -450,6 +442,7 @@
 }
 .collectButton {
   width: 15%;
+  min-width: fit-content;
   aspect-ratio: 1 / 0.4;
   background-color: rgb(70, 70, 70);
   color: white;
@@ -594,9 +587,7 @@
   width: calc(70vw - 70px);
   min-width: fit-content;
   height: calc(90vh - 20px);
-  padding: 10px 0;
-  padding-left: 60px;
-  padding-right: 10px;
+  padding: 55px 10px 0 10px;
 }
 .despandDiv {
   width: 0;
@@ -669,7 +660,7 @@
   z-index: 2;
   opacity: 0.6;
 }
-.enhancedItem{
+.enhancedItem {
   box-shadow: 0 0 12px 6px rgba(255, 255, 255, 0.3);
   border: 2px solid white;
 }
@@ -729,8 +720,9 @@
   z-index: 2;
   top: -120px;
 }
-.notGood1, .notGood2 {
-  flex: 0.44;
+.notGood1,
+.notGood2 {
+  flex: 0.54;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -748,7 +740,12 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  background: linear-gradient(145deg, rgb(27, 132, 39), rgb(72, 255, 93), rgb(27, 132, 39));
+  background: linear-gradient(
+    145deg,
+    rgb(27, 132, 39),
+    rgb(72, 255, 93),
+    rgb(27, 132, 39)
+  );
   border-left: 8px double white;
   border-right: 8px double white;
   border-radius: 4px;
@@ -764,7 +761,16 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(to bottom, #008cff, rgb(255, 255, 255));
-  clip-path: polygon(10% 50%, 25% 80%, 30% 100%, 70% 100%, 75% 80%, 90% 50%, 100% 0%, 0% 0%);
+  clip-path: polygon(
+    10% 50%,
+    25% 80%,
+    30% 100%,
+    70% 100%,
+    75% 80%,
+    90% 50%,
+    100% 0%,
+    0% 0%
+  );
 }
 .beamCont {
   display: flex;
@@ -834,30 +840,55 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 100;
 }
-.bottomContainer{
+.bottomContainer {
   width: 100%;
   height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(90deg, rgb(33, 33, 33), rgb(60, 60, 60), rgb(33, 33, 33));
+  background: linear-gradient(
+    90deg,
+    rgb(33, 33, 33),
+    rgb(60, 60, 60),
+    rgb(33, 33, 33)
+  );
   position: absolute;
   bottom: 0;
-  clip-path: polygon(0 0, 17% 0, 18% 8%, 22% 22%, 42% 4%, 58% 4%, 78% 22%, 82% 8%, 83% 0, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(
+    0 0,
+    17% 0,
+    18% 8%,
+    22% 22%,
+    42% 4%,
+    58% 4%,
+    78% 22%,
+    82% 8%,
+    83% 0,
+    100% 0,
+    100% 100%,
+    0 100%
+  );
 }
 .lava {
   position: absolute;
   width: 60%;
   height: 80px;
   bottom: 0;
-  background: linear-gradient(180deg, rgb(255, 187, 61), orange, rgb(255, 136, 0), rgb(255, 106, 0));
+  background: linear-gradient(
+    180deg,
+    rgb(255, 187, 61),
+    orange,
+    rgb(255, 136, 0),
+    rgb(255, 106, 0)
+  );
   box-shadow: 0 0 28px 12px rgba(255, 106, 0, 0.35);
 }
-.leftIsHidden{
+.leftIsHidden {
   display: none;
 }
-.leftIsNotHidden{
+.leftIsNotHidden {
   display: flex;
 }
 @keyframes tractorBeamMiss {
@@ -934,5 +965,270 @@
   100% {
     background-color: rgb(159, 221, 255);
     box-shadow: 0 0 10px 12px rgba(159, 221, 255, 0.18);
+  }
+}
+@media (800px <= width <=1000px) {
+  #balanceBox {
+    width: 90%;
+  }
+  #balanceBox h2 {
+    top: 5px;
+    font-size: 1.3rem;
+  }
+  #balanceBox .one {
+    bottom: 45px;
+    left: 5px;
+    font-size: 0.8rem;
+  }
+  #balanceBox .two {
+    bottom: 20px;
+    right: 5px;
+    font-size: 0.6rem;
+  }
+  .btn {
+    padding: 5px;
+    width: 80%;
+    height: fit-content;
+    font-size: 1.2rem;
+  }
+  .btn:hover {
+    border: 3px solid rgb(96, 96, 96);
+  }
+  .activeBtn {
+    padding: 5px;
+    width: 80%;
+    height: fit-content;
+    font-size: 1.2rem;
+  }
+  .activeBtn:hover {
+    border: 3px solid white;
+  }
+}
+@media (500px <= width < 800px) {
+  #leftMenu {
+    flex: 0.5;
+  }
+  #balanceBox {
+    width: 90%;
+    aspect-ratio: 1 / 0.7;
+    margin-top: 15px;
+    background-color: rgb(61, 61, 61);
+    border-radius: 18px;
+    position: relative;
+    font-family: "Antic", sans-serif;
+  }
+  #balanceBox h2 {
+    font-size: 1rem;
+  }
+  #balanceBox .one {
+    bottom: 25px;
+    left: 5px;
+    font-size: 0.6rem;
+  }
+  #balanceBox .two {
+    bottom: 5px;
+    right: 5px;
+    font-size: 0.5rem;
+  }
+  #progressBarContainer {
+    bottom: 20px;
+  }
+  #progressBar {
+    height: 100%;
+  }
+  .btn {
+    padding: 4px;
+    width: 90%;
+    height: fit-content;
+    font-size: 1rem;
+  }
+  .btn:hover {
+    border: 3px solid rgb(96, 96, 96);
+  }
+  .activeBtn {
+    padding: 4px;
+    width: 90%;
+    height: fit-content;
+    font-size: 1rem;
+  }
+  .activeBtn:hover {
+    border: 3px solid white;
+  }
+  .enhanceCont {
+    width: 55%;
+  }
+  .bolt {
+    font-size: 9rem;
+  }
+  .bolt:hover {
+    font-size: 9.6rem;
+  }
+  .openMenu .openAmount {
+    height: 25px;
+    font-size: 1rem;
+    margin-top: 15px;
+    margin-left: 7.9px;
+  }
+  .artifactCont {
+    width: calc(33.3333333333% - 20px);
+  }
+  .artifactCont h2 {
+    font-size: 1rem;
+  }
+  .collectButton {
+    font-size: 1.5rem;
+  }
+  .openImg1 {
+    width: 50%;
+  }
+  .openImg2 {
+    width: 35%;
+  }
+  .openImg3 {
+    width: 30%;
+  }
+  .openImg4 {
+    width: 22%;
+  }
+  .openImg5 {
+    width: 22%;
+  }
+  .hiddenImg5 {
+    width: 20%;
+  }
+  .itemCont {
+    width: calc(33.3333333333% - 30px);
+  }
+  .itemCont h1{
+    font-size: 1.3rem;
+  }
+  .selectItem {
+    padding: 55px 0 10px 10px;
+    gap: 10px;
+  }
+  .extractedMoneyCont {
+    font-size: 1.1rem;
+  }
+
+}
+@media (width < 500px) {
+  #leftMenu {
+    flex: 0.8;
+  }
+  #balanceBox {
+    width: 95%;
+  }
+  #balanceBox h2 {
+    top: 5px;
+    font-size: 0.9rem;
+  }
+  #balanceBox .one {
+    bottom: 25px;
+    left: 5px;
+    font-size: 0.5rem;
+  }
+  #balanceBox .two {
+    bottom: 5px;
+    right: 5px;
+    font-size: 0.6rem;
+  }
+  #progressBarContainer {
+    bottom: 20px;
+  }
+  #progressBar {
+    height: 100%;
+  }
+  .btn {
+    padding: 3px;
+    width: 95%;
+    height: fit-content;
+    font-size: 0.75rem;
+  }
+  .btn:hover {
+    border: 3px solid rgb(96, 96, 96);
+  }
+  .activeBtn {
+    padding: 3px;
+    width: 95%;
+    height: fit-content;
+    font-size: 0.75rem;
+  }
+  .activeBtn:hover {
+    border: 3px solid white;
+  }
+  .enhanceCont {
+    width: 60%;
+  }
+  .bolt {
+    font-size: 6.5rem;
+  }
+  .bolt:hover {
+    font-size: 6.6rem;
+  }
+  .openMenu .exit {
+    height: 45px;
+    width: 100px;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+    margin-top: 10px;
+  }
+  .openMenu .exit:hover {
+    background-color: #141414;
+  }
+  .openMenu .openAmount {
+    height: auto;
+    font-size: 0.8rem;
+    margin-top: 8px;
+    margin-left: 5px;
+    padding: 3px;
+  }
+  .openMenu img {
+    width: 50%;
+    aspect-ratio: 1 / 1;
+  }
+  .openMenu h1 {
+    font-family: "Antic", sans-serif;
+    color: white;
+    font-size: 1.2rem;
+  }
+  .artifactCont {
+    width: calc(50% - 20px);
+  }
+  .artifactCont h2 {
+    font-size: 1rem;
+  }
+  .collectButton {
+    font-size: 1.5rem;
+  }
+  .openImg1 {
+    width: 50%;
+  }
+  .openImg2 {
+    width: 35%;
+  }
+  .openImg3 {
+    width: 30%;
+  }
+  .openImg4 {
+    width: 30%;
+  }
+  .openImg5 {
+    width: 30%;
+  }
+  .hiddenImg5 {
+    width: 20%;
+  }
+  .itemCont {
+    width: calc(50% - 30px);
+  }
+  .selectItem {
+    padding: 55px 0 10px 10px;
+    gap: 10px;
+  }
+  .itemCont h1{
+    font-size: 1rem;
+  }
+  .extractedMoneyCont {
+    font-size: 0.9rem;
   }
 }

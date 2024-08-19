@@ -310,26 +310,22 @@ const OwnedSample = ({
           <>
             <div className="openDropCont">
               <img
-                className={`openImg2 indentifyer ${isShaking ? "shake" : ""}`}
-                style={{ left: "28%" }}
+                className={`openImg2 indentifyer ${isShaking ? "shake" : ""} left28`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
               <img
-                className={`openImg2 indentifyer ${isShaking ? "shake" : ""}`}
-                style={{ right: "28%" }}
+                className={`openImg2 indentifyer ${isShaking ? "shake" : ""} right28`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
               <img
-                className={`hiddenImg5 itemIdentifyer`}
-                style={{ left: "32%", transform: "translateX(-32%)" }}
+                className={`hiddenImg5 itemIdentifyer leftTran32`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
               <img
-                className={`hiddenImg5 itemIdentifyer`}
-                style={{ right: "32%", transform: "translateX(32%)" }}
+                className={`hiddenImg5 itemIdentifyer rightTran32`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
@@ -360,26 +356,22 @@ const OwnedSample = ({
             </div>
             <div className="openDropCont openBottom">
               <img
-                style={{ left: "27%" }}
-                className={`openImg3 indentifyer ${isShaking ? "shake" : ""}`}
+                className={`openImg3 indentifyer ${isShaking ? "shake" : ""} left27`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
               <img
-                style={{ right: "27%" }}
-                className={`openImg3 indentifyer ${isShaking ? "shake" : ""}`}
+                className={`openImg3 indentifyer ${isShaking ? "shake" : ""} right27`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
               <img
-                className={`hiddenImg5 itemIdentifyer`}
-                style={{ left: "32%", transform: "translateX(-32%)" }}
+                className={`hiddenImg5 itemIdentifyer leftTran32`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
               <img
-                className={`hiddenImg5 itemIdentifyer`}
-                style={{ right: "32%", transform: "translateX(32%)" }}
+                className={`hiddenImg5 itemIdentifyer rightTran32`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
@@ -410,26 +402,22 @@ const OwnedSample = ({
             </div>
             <div className="openDropCont">
               <img
-                className={`openImg4 indentifyer ${isShaking ? "shake" : ""}`}
-                src={itemID?.image}
-                alt={itemID?.name}
-                style={{ marginRight: "90px" }}
-              />
-              <img
-                className={`openImg4 indentifyer ${isShaking ? "shake" : ""}`}
-                src={itemID?.image}
-                alt={itemID?.name}
-                style={{ marginLeft: "90px" }}
-              />
-              <img
-                className={`hiddenImg5 itemIdentifyer`}
-                style={{ left: "25%", transform: "translateX(-25%)" }}
+                className={`openImg4 indentifyer ${isShaking ? "shake" : ""} marginRight90`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
               <img
-                className={`hiddenImg5 itemIdentifyer`}
-                style={{ right: "25%", transform: "translateX(25%)" }}
+                className={`openImg4 indentifyer ${isShaking ? "shake" : ""} marginLeft90`}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+              <img
+                className={`hiddenImg5 itemIdentifyer leftTran25`}
+                src={itemID?.image}
+                alt={itemID?.name}
+              />
+              <img
+                className={`hiddenImg5 itemIdentifyer rightTran25`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
@@ -473,26 +461,22 @@ const OwnedSample = ({
             </div>
             <div className="openDropCont">
               <img
-                className={`openImg5 indentifyer ${isShaking ? "shake" : ""}`}
-                style={{ left: "30%" }}
+                className={`openImg5 indentifyer ${isShaking ? "shake" : ""} left30`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
               <img
-                className={`openImg5 indentifyer ${isShaking ? "shake" : ""}`}
-                style={{ right: "30%" }}
+                className={`openImg5 indentifyer ${isShaking ? "shake" : ""} right30`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
               <img
-                className={`hiddenImg5 itemIdentifyer`}
-                style={{ left: "25%", transform: "translateX(-25%)" }}
+                className={`hiddenImg5 itemIdentifyer leftTran25`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
               <img
-                className={`hiddenImg5 itemIdentifyer`}
-                style={{ right: "25%", transform: "translateX(25%)" }}
+                className={`hiddenImg5 itemIdentifyer rightTran25`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
@@ -502,26 +486,22 @@ const OwnedSample = ({
               style={{ marginTop: "20px" }}
             >
               <img
-                className={`openImg5 indentifyer ${isShaking ? "shake" : ""}`}
-                style={{ left: "20%" }}
+                className={`openImg5 indentifyer ${isShaking ? "shake" : ""} left20`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
               <img
-                className={`openImg5 indentifyer ${isShaking ? "shake" : ""}`}
-                style={{ right: "20%" }}
+                className={`openImg5 indentifyer ${isShaking ? "shake" : ""} right20`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
               <img
-                className={`hiddenImg5 itemIdentifyer`}
-                style={{ left: "37%", transform: "translateX(-37%)" }}
+                className={`hiddenImg5 itemIdentifyer leftTran37`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />
               <img
-                className={`hiddenImg5 itemIdentifyer`}
-                style={{ right: "37%", transform: "translateX(37%)" }}
+                className={`hiddenImg5 itemIdentifyer rightTran37`}
                 src={itemID?.image}
                 alt={itemID?.name}
               />

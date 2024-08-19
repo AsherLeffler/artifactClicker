@@ -44,6 +44,99 @@ function App() {
   const [leftIsHidden, setLeftIsHidden] = useState(false);
 
   useEffect(() => {
+    const storedOwnedArtifacts = localStorage.getItem("ownedArtifacts");
+    const storedBalance = localStorage.getItem("balance");
+    const storedTotalValue = localStorage.getItem("totalValue");
+    const storedLevelID = localStorage.getItem("levelID");
+    const storedCertifiedMax = localStorage.getItem("certifiedMax");
+    const storedLuck = localStorage.getItem("luck");
+    const storedCurrentCertifiedPrice = localStorage.getItem(
+      "currentCertifiedPrice"
+    );
+    const storedCurrentLuckPrice = localStorage.getItem("currentLuckPrice");
+    const storedCurrentCoinsPrice = localStorage.getItem("currentCoinsPrice");
+    const storedCurrentEnhancePrice = localStorage.getItem(
+      "currentEnhancePrice"
+    );
+    const storedUpgradeAtMax0 = localStorage.getItem("upgradeAtMax0");
+    const storedUpgradeAtMax1 = localStorage.getItem("upgradeAtMax1");
+    const storedUpgradeAtMax2 = localStorage.getItem("upgradeAtMax2");
+    const storedUpgradeAtMax3 = localStorage.getItem("upgradeAtMax3");
+    const storedMax = localStorage.getItem("max");
+    const storedMin = localStorage.getItem("min");
+    const storedEnhancingEfficiency = localStorage.getItem(
+      "enhancingEfficiency"
+    );
+
+    if (storedOwnedArtifacts)
+      setOwnedArtifacts(JSON.parse(storedOwnedArtifacts));
+    if (storedBalance) setBalance(Number(storedBalance));
+    if (storedTotalValue) {
+      const newValueProgress =
+        ((levelValue - Number(storedTotalValue)) / levelValue) * 100;
+      setValueProgress(newValueProgress);
+
+      const progressBar = document.getElementById("progressBar");
+      if (progressBar) {
+        progressBar.style.width = `${newValueProgress}%`;
+      }
+
+      setTotalValue(Number(storedTotalValue));
+    }
+    if (storedLevelID) setLevelID(Number(storedLevelID));
+    if (storedCertifiedMax) setCertifiedMax(storedCertifiedMax);
+    if (storedLuck) setLuck(Number(storedLuck));
+    if (storedCurrentCertifiedPrice === "Max") {
+      setCurrentCertifiedPrice(storedCurrentCertifiedPrice);
+    } else if (storedCurrentCertifiedPrice) {
+      setCurrentCertifiedPrice(Number(storedCurrentCertifiedPrice));
+    }
+    if (storedCurrentLuckPrice === "Max") {
+      setCurrentLuckPrice(storedCurrentLuckPrice);
+    } else if (storedCurrentLuckPrice) {
+      setCurrentLuckPrice(Number(storedCurrentLuckPrice));
+    }
+    if (storedCurrentCoinsPrice === "Max") {
+      setCurrentCoinsPrice(storedCurrentCoinsPrice);
+    } else if (storedCurrentCoinsPrice) {
+      setCurrentCoinsPrice(Number(storedCurrentCoinsPrice));
+    }
+    if (storedCurrentEnhancePrice === "Max") {
+      setCurrentEnhancePrice(storedCurrentEnhancePrice);
+    } else if (storedCurrentEnhancePrice) {
+      setCurrentEnhancePrice(Number(storedCurrentEnhancePrice));
+    }
+    if (storedUpgradeAtMax0) setUpgradeAtMax0(JSON.parse(storedUpgradeAtMax0));
+    if (storedUpgradeAtMax1) setUpgradeAtMax1(JSON.parse(storedUpgradeAtMax1));
+    if (storedUpgradeAtMax2) setUpgradeAtMax2(JSON.parse(storedUpgradeAtMax2));
+    if (storedUpgradeAtMax3) setUpgradeAtMax3(JSON.parse(storedUpgradeAtMax3));
+    if (storedMax) setMax(storedMax);
+    if (storedMin) setMin(storedMin);
+    if (storedEnhancingEfficiency)
+      setEnhancingEfficiency(storedEnhancingEfficiency);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("ownedArtifacts", JSON.stringify(ownedArtifacts));
+    localStorage.setItem("balance", balance);
+    localStorage.setItem("totalValue", totalValue);
+    localStorage.setItem("levelID", levelID);
+    localStorage.setItem("certifiedMax", certifiedMax);
+    localStorage.setItem("luck", luck);
+    localStorage.setItem("currentCertifiedPrice", currentCertifiedPrice);
+    localStorage.setItem("currentLuckPrice", currentLuckPrice);
+    localStorage.setItem("currentCoinsPrice", currentCoinsPrice);
+    localStorage.setItem("currentEnhancePrice", currentEnhancePrice);
+    localStorage.setItem("upgradeAtMax0", upgradeAtMax0);
+    localStorage.setItem("upgradeAtMax1", upgradeAtMax1);
+    localStorage.setItem("upgradeAtMax2", upgradeAtMax2);
+    localStorage.setItem("upgradeAtMax3", upgradeAtMax3);
+    localStorage.setItem("max", max);
+    localStorage.setItem("min", min);
+    localStorage.setItem("enhancingEfficiency", enhancingEfficiency);
+  }, [ownedArtifacts, balance, totalValue]);
+
+  useEffect(() => {
     if (totalValue >= levelValue) {
       function newLevelValue() {
         switch (levelID) {
@@ -217,7 +310,10 @@ function App() {
   return (
     <>
       <div id="mainBody">
-        <div id="leftMenu" className={leftIsHidden ? "leftIsHidden" : "leftIsNotHidden"}>
+        <div
+          id="leftMenu"
+          className={leftIsHidden ? "leftIsHidden" : "leftIsNotHidden"}
+        >
           <div id="balanceBox">
             <h2>
               <i className="fa-solid fa-coins"></i> {checkBalance()}
