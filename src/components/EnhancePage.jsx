@@ -33,9 +33,17 @@ const EnhancePage = ({
       setSelectItemActive(false);
     }, 300);
   };
-  const [enhanceProgress, setEnhanceProgress] = useState(99);
+  const [enhanceProgress, setEnhanceProgress] = useState(0);
   let timeIntervalID;
   let enhanceProgressInterval = null;
+
+  useEffect(() => {
+    if (currentPage === "main") {
+      setEnhanceProgress(0);
+      setActiveEnhanceItem(null);
+    }
+  }, [currentPage]);
+
   useEffect(() => {
     if (currentPage === "beamEnhance") {
       let moveInterval;
