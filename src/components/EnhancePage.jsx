@@ -33,7 +33,7 @@ const EnhancePage = ({
       setSelectItemActive(false);
     }, 300);
   };
-  const [enhanceProgress, setEnhanceProgress] = useState(0);
+  const [enhanceProgress, setEnhanceProgress] = useState(99);
   let timeIntervalID;
   let enhanceProgressInterval = null;
   useEffect(() => {
@@ -59,9 +59,8 @@ const EnhancePage = ({
             enhanceProgressInterval = setInterval(() => {
               if (enhanceProgress >= 100) {
                 const newTotalValue = (
-                  totalValue + activeEnhanceItem.value
+                  Number(totalValue) + activeEnhanceItem.value
                 ).toFixed(2);
-                console.log(newTotalValue);
                 const newValueProgress =
                   ((levelValue - newTotalValue) / levelValue) * 100;
                 setTotalValue(newTotalValue);
@@ -127,7 +126,7 @@ const EnhancePage = ({
                               const newProgress = prevProgress + 1;
                               if (newProgress >= 100) {
                                 const newTotalValue = (
-                                  totalValue + activeEnhanceItem.value
+                                  Number(totalValue) + activeEnhanceItem.value
                                 ).toFixed(2);
                                 const newValueProgress =
                                   ((levelValue - newTotalValue) / levelValue) *
@@ -192,7 +191,7 @@ const EnhancePage = ({
                               const newProgress = prevProgress + 1;
                               if (newProgress >= 100) {
                                 const newTotalValue = (
-                                  totalValue + activeEnhanceItem.value
+                                  Number(totalValue) + activeEnhanceItem.value
                                 ).toFixed(2);
                                 const newValueProgress =
                                   ((levelValue - newTotalValue) / levelValue) *
