@@ -71,6 +71,12 @@ const EnhancePage = ({
                 ).toFixed(2);
                 const newValueProgress =
                   ((levelValue - newTotalValue) / levelValue) * 100;
+                const close1 = document.querySelector(".close1");
+                const close2 = document.querySelector(".close2");
+                close1.style.animation = "close 1s forwards";
+                close2.style.animation = "close 1s forwards";
+                close1.style.backgroundColor = "lightblue";
+                close2.style.backgroundColor = "lightblue";
                 setTotalValue(newTotalValue);
                 setValueProgress(newValueProgress);
                 document.getElementById(
@@ -91,7 +97,7 @@ const EnhancePage = ({
                 setTimeout(() => {
                   setCurrentPage("main");
                   setLeftIsHidden(false);
-                }, 1000);
+                }, 1200);
               } else {
                 setEnhanceProgress((prevProgress) => prevProgress + 1);
               }
@@ -139,6 +145,14 @@ const EnhancePage = ({
                                 const newValueProgress =
                                   ((levelValue - newTotalValue) / levelValue) *
                                   100;
+                                const close1 =
+                                  document.querySelector(".close1");
+                                const close2 =
+                                  document.querySelector(".close2");
+                                close1.style.animation = "close 1s forwards";
+                                close2.style.animation = "close 1s forwards";
+                                close1.style.backgroundColor = "lightblue";
+                                close2.style.backgroundColor = "lightblue";
                                 setTotalValue(newTotalValue);
                                 setValueProgress(newValueProgress);
                                 document.getElementById(
@@ -165,7 +179,7 @@ const EnhancePage = ({
                                 setTimeout(() => {
                                   setCurrentPage("main");
                                   setLeftIsHidden(false);
-                                }, 1000);
+                                }, 1200);
                                 return 100;
                               } else {
                                 return newProgress;
@@ -204,6 +218,14 @@ const EnhancePage = ({
                                 const newValueProgress =
                                   ((levelValue - newTotalValue) / levelValue) *
                                   100;
+                                const close1 =
+                                  document.querySelector(".close1");
+                                const close2 =
+                                  document.querySelector(".close2");
+                                close1.style.animation = "close 1s forwards";
+                                close2.style.animation = "close 1s forwards";
+                                close1.style.backgroundColor = "lightblue";
+                                close2.style.backgroundColor = "lightblue";
                                 setTotalValue(newTotalValue);
                                 setValueProgress(newValueProgress);
                                 document.getElementById(
@@ -230,7 +252,7 @@ const EnhancePage = ({
                                 setTimeout(() => {
                                   setCurrentPage("main");
                                   setLeftIsHidden(false);
-                                }, 1000);
+                                }, 1200);
                                 return 100;
                               } else {
                                 return newProgress;
@@ -300,7 +322,7 @@ const EnhancePage = ({
       };
     }
   }, [currentPage]);
-  const [time, setTime] = useState(100);
+  const [time, setTime] = useState(60);
   useEffect(() => {
     if (currentPage === "beamEnhance") {
       const imgCont = document.querySelector(".imgCont");
@@ -313,13 +335,18 @@ const EnhancePage = ({
             ).toFixed(2);
             const newValueProgress =
               ((levelValue - newTotalValue) / levelValue) * 100;
+            const close1 = document.querySelector(".close1");
+            const close2 = document.querySelector(".close2");
+            close1.style.animation = "close 1s forwards";
+            close2.style.animation = "close 1s forwards";
+            close1.style.backgroundColor = "red";
+            close2.style.backgroundColor = "red";
             setTotalValue(newTotalValue);
             setValueProgress(newValueProgress);
             document.getElementById(
               "progressBar"
             ).style.width = `${newValueProgress}%`;
             clearInterval(timeIntervalID);
-            setCurrentPage("main");
             setLeftIsHidden(false);
             setOwnedArtifacts((prevArtifacts) =>
               prevArtifacts.filter(
@@ -327,6 +354,9 @@ const EnhancePage = ({
                   ownedArtifact.newArtifact !== activeEnhanceItem
               )
             );
+            setTimeout(() => {
+              setCurrentPage("main");
+            }, 1200);
             return 100;
           } else {
             imgCont.style.bottom = prevTime + "px";
@@ -405,6 +435,9 @@ const EnhancePage = ({
               {enhanceProgress >= 100 ? 100 : enhanceProgress}%
             </div>
           )}
+          <div className="timeCont">
+            <h1>Time Left: {time}</h1>
+          </div>
           <div className="imgCont">
             <img
               src={activeEnhanceItem.img}
@@ -416,6 +449,8 @@ const EnhancePage = ({
           <div className="bottomContainer">
             <div className="lava"></div>
           </div>
+          <div className="close1"></div>
+          <div className="close2"></div>
         </div>
       )}
     </>

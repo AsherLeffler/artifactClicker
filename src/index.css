@@ -55,6 +55,12 @@ body {
 .artifact h3 {
   margin: 0;
 }
+.rankText{
+  font-family: "Antic", sans-serif;
+  font-size: 1.3rem;
+  color: white;
+  margin-left: 10px;
+}
 .canBuy,
 .cannotBuy {
   width: 90%;
@@ -314,6 +320,40 @@ body {
 }
 .itemMenu::-webkit-scrollbar-corner {
   background: #2c2c2c;
+}
+.close1, .close2{
+  height: 100vh;
+  width: 0;
+  position: absolute;
+}
+.close1{
+  left: 0;
+}
+.close2{
+  right: 0;
+}
+.timeCont{
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: grey;
+  font-family: "Antic", sans-serif;
+  font-size: 0.8rem;
+  z-index: 100;
+}
+@keyframes close {
+  0% {
+    width: 0%;
+  }
+  100%{
+    width: 50%;
+  }
 }
 @media (800px <= width <= 1000px) {
 }

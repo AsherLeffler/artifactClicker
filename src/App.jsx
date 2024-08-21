@@ -1,10 +1,22 @@
 import { useState, useEffect, useRef } from "react";
 import "./App.css";
+
+// Pages:
 import ExtractPage from "./components/ExtractPage";
 import InventoryPage from "./components/InventoryPage";
 import ShopPage from "./components/ShopPage";
 import UpgradesPage from "./components/UpgradesPage";
 import EnhancePage from "./components/EnhancePage";
+
+// Ranks:
+import rank_1 from "./assets/ranks/rank_1.png";
+import rank_2 from "./assets/ranks/rank_2.png";
+import rank_3 from "./assets/ranks/rank_3.png";
+import rank_4 from "./assets/ranks/rank_4.png";
+import rank_5 from "./assets/ranks/rank_5.png";
+import rank_6 from "./assets/ranks/rank_6.png";
+import rank_7 from "./assets/ranks/rank_7.png";
+import rank_8 from "./assets/ranks/rank_8.png";
 
 function App() {
   const [activeButton, setActiveButton] = useState("extractBtn");
@@ -163,10 +175,7 @@ function App() {
       }%`;
       setLevelValue(newLevelValue());
       setValueProgress(newLevelValue() - totalValue);
-      if (levelID == 9) {
-      } else {
-        setLevelID((prevLevelID) => prevLevelID + 1);
-      }
+      if (levelID !== 9) setLevelID((prevLevelID) => prevLevelID + 1);
     } else {
       setValueProgress(((levelValue - totalValue) / levelValue) * 100);
     }
@@ -176,6 +185,29 @@ function App() {
       setMoreValueNeeded(levelValue - totalValue);
     }
   }, [totalValue, levelValue, levelID]);
+
+  const findRank = () => {
+    switch (levelID) {
+      case 2:
+        return rank_1;
+      case 3:
+        return rank_2;
+      case 4:
+        return rank_3;
+      case 5:
+        return rank_4;
+      case 6:
+        return rank_5;
+      case 7:
+        return rank_6;
+      case 8:
+        return rank_7;
+      case 9:
+        return rank_8;
+      default:
+        return rank_1;
+    }
+  };
 
   function handleClick(e) {
     setActiveButton(e.target.id);
@@ -314,6 +346,12 @@ function App() {
           id="leftMenu"
           className={leftIsHidden ? "leftIsHidden" : "leftIsNotHidden"}
         >
+          <div className="rankCont">
+            <h1 className="rankText">Rank:</h1>
+            <div className="rank">
+              <img src={findRank()} alt="Rank" id="rank" />
+            </div>
+          </div>
           <div id="balanceBox">
             <h2>
               <i className="fa-solid fa-coins"></i> {checkBalance()}

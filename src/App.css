@@ -26,7 +26,7 @@
   position: absolute;
   margin: 0;
   top: 5px;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: rgb(145, 145, 145);
   width: 100%;
   text-align: center;
@@ -42,10 +42,31 @@
 #balanceBox .two {
   position: absolute;
   bottom: 20px;
-  right: 5px;
+  left: 5px;
   margin: 0;
   font-size: 0.8rem;
   color: rgb(101, 101, 101);
+}
+.rankCont{
+  width: 100%;
+  height: 8vh;
+  background-color: rgb(35, 35, 35);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0 0 6px 6px;
+}
+.rank{
+  height: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+#rank{
+  width: 110%;
+  height: 110%;
 }
 #progressBarContainer {
   height: 3px;
@@ -659,6 +680,7 @@
   aspect-ratio: 1;
   z-index: 2;
   opacity: 0.6;
+  border-radius: 25px;
 }
 .enhancedItem {
   box-shadow: 0 0 12px 6px rgba(255, 255, 255, 0.3);
@@ -670,7 +692,7 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  bottom: 100px;
+  bottom: 60px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -973,7 +995,7 @@
   }
   #balanceBox h2 {
     top: 5px;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
   #balanceBox .one {
     bottom: 45px;
