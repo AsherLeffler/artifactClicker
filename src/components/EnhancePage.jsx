@@ -322,7 +322,7 @@ const EnhancePage = ({
       };
     }
   }, [currentPage]);
-  const [time, setTime] = useState(60);
+  const [time, setTime] = useState(80);
   useEffect(() => {
     if (currentPage === "beamEnhance") {
       const imgCont = document.querySelector(".imgCont");
