@@ -55,6 +55,14 @@ body {
 .artifact h3 {
   margin: 0;
 }
+.cannotEnhanceTouch{
+  font-size: 2rem;
+  font-family: "Antic", sans-serif;
+  color: white;
+  text-align: center;
+  text-decoration: underline;
+  padding: 0 10px;
+}
 .rankText{
   font-family: "Antic", sans-serif;
   font-size: 1.3rem;

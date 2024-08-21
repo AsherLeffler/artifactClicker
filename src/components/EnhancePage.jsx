@@ -376,7 +376,7 @@ const EnhancePage = ({
 
   return (
     <>
-      {currentPage === "main" && (
+      {(currentPage === "main" && !isTouchDevice()) && (
         <div className="enhancePage">
           <div className="enhanceCont">
             <h1 className="bolt">
@@ -423,6 +423,11 @@ const EnhancePage = ({
           </div>
         </div>
       )}
+      {(currentPage === "main" && isTouchDevice()) && (
+        <div className="enhancePage cannotEnhanceTouch">
+          Enhancing Requires a Physical Keyboard
+        </div>
+      )}
       {currentPage === "beamEnhance" && (
         <div className="rightPage enhanceScene">
           <div className="beamCont">
@@ -443,8 +448,6 @@ const EnhancePage = ({
           <div className="timeCont">
             <h1>Time Left: {time}</h1>
           </div>
-          {isTouchDevice() && <button className="leftMovePlayer">{"<"}</button>}
-          {isTouchDevice() && <button className="rightMovePlayer">{">"}</button>}
           <div className="imgCont">
             <img
               src={activeEnhanceItem.img}
