@@ -369,6 +369,11 @@ const EnhancePage = ({
       clearInterval(timeIntervalID);
     };
   }, [currentPage]);
+
+  const isTouchDevice = () => {
+    return ("ontouchstart" in window || navigator.maxTouchPoints) && window.innerWidth < 800;
+  }
+
   return (
     <>
       {currentPage === "main" && (
@@ -438,6 +443,8 @@ const EnhancePage = ({
           <div className="timeCont">
             <h1>Time Left: {time}</h1>
           </div>
+          {isTouchDevice() && <button className="leftMovePlayer">{"<"}</button>}
+          {isTouchDevice() && <button className="rightMovePlayer">{">"}</button>}
           <div className="imgCont">
             <img
               src={activeEnhanceItem.img}

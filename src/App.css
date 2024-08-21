@@ -1125,13 +1125,14 @@
     font-size: 1.3rem;
   }
   .selectItem {
-    padding: 55px 0 10px 10px;
     gap: 10px;
+  }
+  .expandDiv{
+    padding: 55px 0 10px 10px;
   }
   .extractedMoneyCont {
     font-size: 1.1rem;
   }
-
 }
 @media (width < 500px) {
   #leftMenu {
@@ -1244,8 +1245,10 @@
     width: calc(50% - 30px);
   }
   .selectItem {
-    padding: 55px 0 10px 10px;
     gap: 10px;
+  }
+  .expandDiv{
+    padding: 55px 0 10px 10px;
   }
   .itemCont h1{
     font-size: 1rem;
