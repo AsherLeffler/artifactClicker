@@ -1,8 +1,5 @@
-# React + Vite
+# Artifact Clicker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+One of my projects to help me create a stronger understanding of React.JS.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+It is a game where you click to extract money and you can use that to buy new samples or upgrades. By opening samples, you can get random loot and get a value for each artifact that you gain. It can either be certified or not which helps with gaining value. Another way to gain value on your artifacts is to enhance them with the beacon. You can do it for free with the risk of losing your item if it falls in the lava completely. Completing the minigame will result in your item being worth double what it was previously. Get to the highest rank you can, and explore 240 different artifacts that are yet to be collected. 
