@@ -7,6 +7,7 @@ import InventoryPage from "./components/InventoryPage";
 import ShopPage from "./components/ShopPage";
 import UpgradesPage from "./components/UpgradesPage";
 import EnhancePage from "./components/EnhancePage";
+import HelpPage from "./components/HelpPage";
 
 // Ranks:
 import rank_1 from "./assets/ranks/rank_1.png";
@@ -321,6 +322,8 @@ function App() {
             setLeftIsHidden={setLeftIsHidden}
           />
         );
+      case "helpBtn":
+        return <HelpPage />;
       default:
         return (
           <ExtractPage
@@ -400,6 +403,13 @@ function App() {
             onClick={handleClick}
           >
             <i className="fa-solid fa-bolt"></i> Enhance
+          </button>
+          <button
+            id="helpBtn"
+            className={activeButton == "helpBtn" ? "activeBtn btn" : "btn"}
+            onClick={handleClick}
+          >
+            <i className="fa-solid fa-question"></i> Help
           </button>
         </div>
         {renderCurrentPage()}
