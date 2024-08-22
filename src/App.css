@@ -54,7 +54,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 0 0 6px 6px;
 }
 .rank{
   height: 100%;
