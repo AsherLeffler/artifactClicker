@@ -57,6 +57,13 @@ body {
   margin: 0;
   margin-top: 20px;
 }
+.helpPage hr{
+  width: 80%;
+  border: 2px solid rgb(75, 75, 75);
+  border-radius: 2px;
+  margin: 10px;
+  margin-left: 25px;
+}
 .icon {
   font-size: 8rem;
   transition: 0.05s;
@@ -437,6 +444,12 @@ body {
   }
 }
 @media (800px <= width <= 1000px) {
+  .helpText h1{
+    font-size: 1.6rem;
+  }
+  .helpPage p{
+    font-size: 1rem;
+  }  
 }
 @media (500px <= width <800px) {
   .icon {
@@ -513,6 +526,12 @@ body {
   .rightTran37{
     right: 30%;
     transform: translateX(30%);
+  }  
+  .helpText h1{
+    font-size: 1.5rem;
+  }
+  .helpPage p{
+    font-size: 0.9rem;
   }  
 }
 @media (width < 500px) {
@@ -608,5 +627,11 @@ body {
   .rightTran37{
     right: 25%;
     transform: translateX(25%);
+  }  
+  .helpText h1{
+    font-size: 1.2rem;
+  }
+  .helpPage p{
+    font-size: 0.7rem;
   }  
 }
